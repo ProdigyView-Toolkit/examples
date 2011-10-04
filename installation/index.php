@@ -17,18 +17,6 @@ require_once(PV_CORE.'_BootInstallComponents.php');
 <?php
 if(isset($_POST['install'])){
 	$status=$_POST['status'];
-	$database_args=array(
-		'dbhost'=> '50.57.70.10',
-		'dbuser'=>'admin',
-		'dbpass'=>'OImc277Ti',
-		'dbtype'=>'postgresql',
-		'dbname'=>'pvtest',
-		'dbschema'=>'pvtest',
-		'dbprefix'=>'pv_',
-		'dbport'=>'5432'
-	);
-	PVDatabase::addConnection('postgresql',$database_args);
-	PVDatabase::setDatabase('postgresql');
 	include('script.php');
 	$database_type=PVDatabase::getDatabaseType();
 	$sql_array="";
