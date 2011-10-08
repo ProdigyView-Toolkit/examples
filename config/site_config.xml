@@ -26,6 +26,8 @@
   </email>
   <system>
     <report_errors>1</report_errors>
+    <error_report_level>4</error_report_level>
+    <log_errors>1</log_errors>
     <unset_session>0</unset_session>
     <unset_cookie>0</unset_cookie>
     <unset_post>0</unset_post>
@@ -34,8 +36,6 @@
     <unset_server>0</unset_server>
     <unset_env>0</unset_env>
     <unset_files>0</unset_files>
-    <error_report_level>4</error_report_level>
-    <log_errors>1</log_errors>
     <file_permissions>0644</file_permissions>
     <folder_permissions>0755</folder_permissions>
     <enable_cache>1</enable_cache>
