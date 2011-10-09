@@ -25,7 +25,6 @@ $session_array_data=array('abc',123, 'doe','rae', 'mee');
 
 PVSession::writeCookie($cookie_name, $cookie_data);
 echo '<p>Unhashed Cookie Accessed Directly: '.$_COOKIE[$cookie_name].'</p>';
-
 echo '<p>Unhashed Cookie Accessed through readCookie: '.PVSession::readCookie($cookie_name).'</p>';
 
 PVSession::deleteCookie($cookie_name);
@@ -34,7 +33,6 @@ echo '<hr />';
 
 PVSession::writeCookie($cookie_array_name, $cookie_array_data);
 echo '<p>Unhashed Array Cookie Accessed Directly: '.$_COOKIE[$cookie_array_name].'</p>';
-
 echo '<p>Unhashed ArrayCookie Accessed through readCookie: '.PVSession::readCookie($cookie_array_name).'</p>';
 
 PVSession::deleteCookie($cookie_array_name);
@@ -44,18 +42,14 @@ echo '<hr />';
 $options=array('hash_cookie'=>true);
 PVSession::writeCookie($cookie_name, $cookie_data,$options);
 echo '<p>Hashed Cookie Accessed Directly: '.@$_COOKIE[$cookie_name].'</p>';
-
 echo '<p>Hashed Cookie Accessed through readCookie: '.PVSession::readCookie($cookie_name, $options).'</p>';
 
 PVSession::deleteCookie($cookie_name,$options);
 echo '<p>Cookie Deleted... '.PVSession::readCookie($cookie_name, $options).'</p>';
 echo '<hr />';
 
-
-
 PVSession::writeSession($session_name, $session_data);
 echo '<p>Unhashed Cookie Accessed Directly: '.$_SESSION[$session_name].'</p>';
-
 echo '<p>Unhashed Cookie Accessed through readSession: '.PVSession::readSession($session_name).'</p>';
 
 PVSession::deleteSession($session_name);
@@ -64,7 +58,6 @@ echo '<hr />';
 
 PVSession::writeSession($session_array_name, $session_array_data);
 echo '<p>Unhashed Array Session Accessed Directly: '.$_SESSION[$session_array_name].'</p>';
-
 echo '<p>Unhashed Array Session Accessed through readSession: '.PVSession::readSession($session_array_name).'</p>';
 
 PVSession::deleteSession($session_array_name);
@@ -74,7 +67,6 @@ echo '<hr />';
 $options=array('hash_session'=>true);
 PVSession::writeSession($session_name, $session_data,$options);
 echo '<p>Hashed Session Accessed Directly: '.@$_SESSION[$session_name].'</p>';
-
 echo '<p>Hashed Session Accessed through readSession: '.PVSession::readSession($session_name, $options).'</p>';
 
 PVSession::deleteSession($session_name,$options);
