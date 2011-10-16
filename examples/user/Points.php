@@ -53,7 +53,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		foreach($point_list as $point){
 			?>
-			<p>Deleting subscription <?php echo $point['point_type']; ?> with a value of <?php echo $point['point_value']; ?></p>
+			<p>Deleting point <?php echo $point['point_type']; ?> with a value of <?php echo $point['point_value']; ?></p>
 			<?php
 			PVPoints::deletePoint($point['point_id']);
 		}//end for

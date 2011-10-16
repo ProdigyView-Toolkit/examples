@@ -6,7 +6,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Base Content Example</title>
+		<title>Comments Example</title>
 	</head>
 	<body>
 		<?php
@@ -34,8 +34,51 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		<?php
 		
 		$comment_args=array(
-		
+			'content_id'=>$content_id,
+			'owner_id'=>12,
+			'comment_text'=>'Totally awesome man!',
+			'comment_type'=>'test_comment'
 		);
+		
+		$comment_id=PVComments::addComment($comment_args);
+		
+		$comment_args_2=array(
+			'content_id'=>$content_id,
+			'owner_id'=>12,
+			'comment_text'=>'Totally awesome man!',
+			'comment_type'=>'test_comment',
+			'comment_parent'=>$comment_id
+		);
+		
+		$comment_id_2=PVComments::addComment($comment_args_2);
+		
+		$comment_list=PVComments::getCommentList(array('comment_type'=>'test_comment'));
+		
+		foreach($comment_list as $comment) {
+			?>
+			<pre>
+				<?php print_r($comment);?>
+			</pre>
+			<?php
+			$comment['comment_approved']=1;
+			PVComments::updateComment($comment);
+		}
+		
+		$comment_list=PVComments::getCommentList(array('comment_approved'=>1));
+		
+		foreach($comment_list as $comment) {
+			?>
+			<pre>
+				<?php print_r($comment);?>
+			</pre>
+			<?php
+			PVComments::deleteComment($comment['comment_id']);
+		}
+		
+		PVContent::deleteContent($content_id);
+		
+		
 		?>
+		<p>End Comments Example</p>
 	</body>
 </html> 

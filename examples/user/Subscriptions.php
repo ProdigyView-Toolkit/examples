@@ -1,5 +1,5 @@
 <?php
-//Include the DEFINES and boo the system
+//Include the DEFINES and boot the system
 include_once('../../DEFINES.php');
 require_once(PV_CORE.'_BootCompleteSystem.php');
 ?>
@@ -54,6 +54,8 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		$subscription_list=PVSubscriptions::getSubscriptionList(array());
 		
 		foreach($subscription_list as $subscription){
+			$subscription['subscription_active']=1;
+			PVSubscriptions::updateSubscription($subscription);
 			?>
 			<p>Deleting subscription <?php echo $subscription['subscription_type']; ?></p>
 			<?php
