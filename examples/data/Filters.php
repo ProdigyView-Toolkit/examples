@@ -75,7 +75,7 @@ class ItemChooser{
 		}
 		
 		else if($data['item']=='Beer'){
-			$data['item']='Beer Googles';	
+			$data['item']='Beer Goggles';	
 		}
 		
 		else if($data['item']=='Philopsher\'s Stone'){
