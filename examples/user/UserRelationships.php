@@ -10,7 +10,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 	</head>
 	<body>
 		<?php
-		//Create A user
+		//Create A list of users
 		$args=array(
 			'username'=>'John Doe',
 			'user_email'=>'john@example.com',
@@ -68,6 +68,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<p>The Relationships</p>
 		<?php
+		//Relate the user who you want to have an relationshiop
 		PVUsers::addUserRelationship($user_id_1, $user_id_2, 'married', 1 );
 		
 		PVUsers::addUserRelationship($user_id_3, $user_id_1, 'father-daughter', 1 );
@@ -76,13 +77,15 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		PVUsers::addUserRelationship($user_id_4, $user_id_3, 'cousins', 0 );
 		
+		//Search for the users
 		$relationships=PVUsers::getUserRelationshipList(array('requesting_user'=>"$user_id_1,$user_id_3,$user_id_2,$user_id_4"));
 		
 		foreach($relationships as $relationship){
 			$user1=PVUsers::getUserInfo($relationship['requesting_user']);
 			$user2=PVUsers::getUserInfo($relationship['requested_user']);
 			?>
-			<p><strong><?php echo $user1['username']; ?> and <?php echo $user2['username']; ?> are <?php echo $relationship['relationship_type']; ?></strong></p>
+			<p><strong><?php echo $user1['username']; ?> and <?php echo $user2['username']; ?> are 
+			<?php echo $relationship['relationship_type']; ?></strong></p>
 			<?php
 			$has_relationship= (PVUsers::checkUserRelationship($relationship['requesting_user'], $user_id_1)) ? ' have a relation': ' have no relation';
 			?>
@@ -104,10 +107,12 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 			<?php
 		}//end foreach
 		
+		//Iterate through relationships and delete the relationship
 		foreach($relationships as $relationship){
 			PVUsers::deleteUserRelationship('$relationship_id');
 		}
 		
+		//Iterate through users and delete the user
 		foreach(PVUsers::getUserList() as $user){
 			PVUsers::deleteUser($user['user_id']);
 		}
