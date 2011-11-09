@@ -39,7 +39,6 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		<p>ID of user:<?php echo $user_id_2; ?></p>
 		
 		<?php
-		
 		//Create A user
 		$args=array(
 			'username'=>'Shaniqua Doe',
@@ -83,6 +82,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		foreach($relationships as $relationship){
 			$user1=PVUsers::getUserInfo($relationship['requesting_user']);
 			$user2=PVUsers::getUserInfo($relationship['requested_user']);
+			
 			?>
 			<p><strong><?php echo $user1['username']; ?> and <?php echo $user2['username']; ?> are 
 			<?php echo $relationship['relationship_type']; ?></strong></p>
@@ -109,7 +109,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		//Iterate through relationships and delete the relationship
 		foreach($relationships as $relationship){
-			PVUsers::deleteUserRelationship('$relationship_id');
+			PVUsers::deleteUserRelationship($relationship['relationship_id']);
 		}
 		
 		//Iterate through users and delete the user
