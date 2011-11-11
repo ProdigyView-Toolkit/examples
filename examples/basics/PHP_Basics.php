@@ -10,6 +10,17 @@ $object = new MyObject();
 
 $array[0] = 'My text in an array';
 
+//Defines are variables (strings and numeric values) that are set and made GLOBAl.
+//Because Defines are global, they are accessible anywhere in the code. Defines cannot be changed.
+
+define('DEFINITION_1', 45);
+
+define('DEFINITION_2', 'Hello Word');
+
+echo DEFINITION_1.'<br />';
+
+echo DEFINITION_2.'<br />';
+
 //A very useful data structure is array. Arrays can hold multiple variables. The index in an
 //array can also be named.
 
@@ -25,7 +36,7 @@ $array_3 = array('item1' => 'First Item', 'item2' => 'Second Item');
 
 $array_4 = $array_2 + $array_3;
 
-foreach($array_4 as $key => $value) {
+foreach ($array_4 as $key => $value) {
 	echo "Key $key Value $value <br />";
 }
 
@@ -34,25 +45,28 @@ foreach($array_4 as $key => $value) {
 
 function add($value1, $value2) {
 	$value3 = $value1 + $value2;
-	
+
 	return $value3;
 }
 
-echo add(2, 3);
+echo add(2, 3).'<br />';
 
 //Objects are data structures that can contain multipe functions, and variables. If you are familiar with variable
 //visibility, variables can be assigned to be public, private and protected.
-
 class MyObject {
+
+	public $var1 = 6;
 	
-	public $var1 = 5;
-	
-	function multiply($var2) {
-		
-		return $this->$var1 * $var2;
+	public function __construct() {
+		$this -> var1 = 6;
 	}
+
+	function multiply($var2) {
+		return $this -> var1 * $var2;
+	}
+
 }
 
 $object = new MyObject();
 
-echo $object->multiply(3);
+echo $object -> multiply(3);

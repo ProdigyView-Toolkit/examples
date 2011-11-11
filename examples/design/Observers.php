@@ -37,9 +37,9 @@ $messenger->addMessage('One Framework to rule them all!');
 echo '<h2>Add observers</h2>';
 
 //Add Event that will call an instance of an object
-$messenger->_addObserver('new_message' , 'StalkerBook', 'updateFeed', $options=array('object'=>'instance'));
+$messenger->addObserver('new_message' , 'StalkerBook', 'updateFeed', $options=array('object'=>'instance'));
 //Add Event that will call a static method
-$messenger->_addObserver('new_message' , 'ClutterSpace', 'updateWall');
+$messenger->addObserver('new_message' , 'ClutterSpace', 'updateWall');
 $messenger->addMessage('What was that wood chuck rhyme again?');
 
 
@@ -77,7 +77,7 @@ PChat::addMessage('One Framework to rule them all!');
 echo '<h2>Add observers</h2>';
 
 //Add Event that will call an instance of an object
-PChat::_addObserver('new_message' , 'FiveSquare', 'updateFeed', $options=array('object'=>'instance'));
+PChat::addObserver('new_message' , 'FiveSquare', 'updateFeed', $options=array('object'=>'instance'));
 //Add Event that will call a static method
-PChat::_addObserver('new_message' , 'PointlessIN', 'updateWall');
+PChat::addObserver('new_message' , 'PointlessIN', 'updateWall');
 PChat::addMessage('What was that wood chuck rhyme again?');

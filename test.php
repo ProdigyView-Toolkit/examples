@@ -9,7 +9,7 @@ class Test extends PVObject {
 	public function run(){
 		
 		//$newfunc = create_function('$data=array()', ' $data[]return "$a is going to the store";');
-		$this->_addFilter(get_class(),'run',  $newfunc);
+		$this->addFilter(get_class(),'run',  $newfunc);
 		
 		$result=$this->_applyFilter(get_class(),__FUNCTION__, 20, 5);
 		
