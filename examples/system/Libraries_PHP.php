@@ -1,8 +1,8 @@
 <?php
 //Include the DEFINES and boot the system
-include_once('../../DEFINES.php');
-require_once(PV_CORE.'_BootCoreComponents.php');
-PVBootstrap::bootSystem(array('initialize_libraries'=>false, 'load_libraries'=>false));
+include_once ('../../DEFINES.php');
+require_once (PV_CORE . '_BootCoreComponents.php');
+PVBootstrap::bootSystem(array('initialize_libraries' => false, 'load_libraries' => false));
 
 //The first round of flipswitch should not run any functions because the library has
 //yet to be loaded
@@ -13,7 +13,7 @@ flipSwitch();
 //define location but only allow calles to be included with the extension
 //.class.php. The first arguement is the folder name.
 PVLibraries::init();
-PVLibraries::addLibrary('pv_switch', array('extensions'=>array('.class.php')));
+PVLibraries::addLibrary('pv_switch', array('extensions' => array('.class.php')));
 PVLibraries::loadLibraries();
 
 echo '<h1>Test 2</h1>';
@@ -33,24 +33,24 @@ flipSwitch();
  * will become accessible
  */
 function flipSwitch() {
-	
-	if(class_exists('PowerSwitch')){
+
+	if (class_exists('PowerSwitch')) {
 		echo '<h3>PowerSwitch</h3>';
 		PowerSwitch::on();
 		PowerSwitch::off();
 	} else {
 		echo '<p><strong>Class "PowerSwitch" Not Found</strong></p>';
 	}
-	
-	if(class_exists('Fuse')){
+
+	if (class_exists('Fuse')) {
 		echo '<h3>Fuse</h3>';
 		Fuse::on();
 		Fuse::off();
 	} else {
 		echo '<p><strong>Class "Fuse" Not Found</strong></p>';
 	}
-	
-	if(class_exists('PowerPlant')){
+
+	if (class_exists('PowerPlant')) {
 		echo '<h3>PowerPlant</h3>';
 		PowerPlant::on();
 		PowerPlant::off();
@@ -59,5 +59,3 @@ function flipSwitch() {
 	}
 
 }
-
-

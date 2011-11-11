@@ -3,5 +3,5 @@
 include_once('../../DEFINES.php');
 require_once(PV_CORE.'_BootCompleteSystem.php');
 
-$mail=array('receiver'=>'devin.dixon22@gmail.com', 'sender'=>'contact@phonefare.com', 'subject'=>'Test Message', 'message'=>'Hello World');
+$mail=array('receiver'=>'an_email@example.com', 'sender'=>'a_reciever@example.com', 'subject'=>'Test Message', 'message'=>'Hello World');
 PVMail::sendEmailPHP($mail);
