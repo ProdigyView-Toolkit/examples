@@ -1,17 +1,26 @@
 <?php
-//Include the DEFINES and include only the components. This will allow you to explicity 
-//change the boot configuration to set your to fit your needs. Rememeber to not initialize
-// the database or load the plugins.
+//Start the boot by including the Defines
+//This will set up the directory
 include_once('../../DEFINES.php');
-require_once(PV_CORE.'_BootCoreComponents.php');
 
-//Will boot the entire system. This is includes plugings
-//require_once(PV_CORE.'_BootComplete.php');
+//Include the _classLoader
+//This uses spl_autload for loading the classes. Will only located the classes required
+include_once(PV_CORE.'_classLoader');
 
-//If none of the those boot options work, you can write your own just booting the core components
-//And then configuring PVBootstap;
+//If Uncommented, this include will boot the entire system. This is includes plugings
+//require_once(PV_CORE.'_BootCompleteSystem.php');
 
-//Create a list of boot options to be used
+//If uncommented, will boot the database without the plugins
+//require_once(PV_CORE.'_BootMinusPlugins.php');
+
+//If uncommmented, Will bot the sytem without the database and also no plugins
+//require_once(PV_CORE.'_BootMinusDatabase.php');
+
+/** 
+ *If none of the those boot options work, you can write your own just booting the core components
+ * And then configuring PVBootstap;
+ */
+
 $boot_options= array(
 	'initialiaze_database' => FALSE,//If set to true, that database will be initialized and a connection made to the default database
 	'initialize_libraries' => TRUE, //If set to true, the libraries class will be initialized
@@ -27,3 +36,5 @@ $boot_options= array(
 
 //Boot the system with the defined arguements
 PVBootstrap::bootSystem($boot_options);
+
+echo 'A successful boot1';

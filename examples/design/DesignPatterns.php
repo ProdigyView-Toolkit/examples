@@ -3,6 +3,11 @@
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_BootCompleteSystem.php');
 
+/**
+ * This tutorial is for mixing the design patterns to make functions and classes
+ * easily mutable. The majority of functions in ProdigyView use the adapter,
+ * intercepting filters and observers.
+ */
 class Restaurant extends PVApplication {
 
 	private $total;
@@ -79,7 +84,7 @@ class Restaurant extends PVApplication {
 	}
 
 	public function defaultFunction($params = array()) {
-		return 'No Color found';
+		return 'No one in the restaurants knows what to do.';
 	}
 
 }
@@ -110,6 +115,21 @@ class Billing {
 
 }
 
+class Waitress {
+		
+		public function checkTip($total, $amount, $tip) {
+			
+			$gratuity = $total * .18;
+			
+			if($gratuity >= $tip) {
+				echo '<p>Waitress is satisfied with tip</p>';
+			} else {
+				echo '<p>Cheapskate</p>';
+			}
+		}
+	
+}
+
 $restaurant = new Restaurant();
 
 $restaurant -> commandInterpreter('walkIn');
@@ -129,3 +149,8 @@ echo $restaurant -> commandInterpreter('placeOrder', 'steak');
 echo $restaurant -> commandInterpreter('placeOrder', 'juice');
 
 echo $restaurant -> commandInterpreter('requestCheck');
+
+$closed = function() {
+	
+	echo '<h3>Sorry but we are closed for busines</h3>';
+};

@@ -33,12 +33,13 @@ echo ParentObject::aPublicMethod();
 class MyObjectWithExtension extends ParentObject {
 
 	public static function aNewMethod() {
+		echo 'I am going to call the protected method of my parent class.<br />';
 		static::_aProtectedMethod();
 	}
 	
 	public static function anErrroMethod() {
 		echo 'Calling me with throw an error because I cannot call a private method of my parent.';
-		static::_aProtectedMethod();
+		static::aPrivateMethod();
 	}
 
 }
@@ -52,15 +53,11 @@ MyObjectWithExtension::aNewMethod();
  * Annonymous functions are functions that are created on the fly.
  */
 
-$htmlEnlose = function($string, $html_tags) {
+$htmlEnclose = function($string, $html_tag) {
 	
-	return $html_tags.$string.$html_tags;
-}
+	return '<'.$html_tag.'>'.$string.'</'.$html_tag.'>';
+};
 
- 
- /*
-  * Try - catch statements is the ability to catch an error when execution does
-  * not perform correctly and prevents your code from crashing.
-  */
-
+echo $htmlEnclose('Wrap Me', 'h1');
+$storedFunctions = array( $htmlEnclose );
    
