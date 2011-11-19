@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <site_config>
   <general>
-    <site_name>site-Name</site_name>
-    <site_address>site_address</site_address>
-    <site_index>site_index</site_index>
+    <site_name>Site-Name</site_name>
+    <site_address>Site_address</site_address>
+    <site_index>Site_index</site_index>
     <site_slogan>One Framework To Rule Them All</site_slogan>
     <tmp_url>tmp/</tmp_url>
     <admin_url></admin_url>
