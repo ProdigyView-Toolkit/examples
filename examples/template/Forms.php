@@ -1,5 +1,5 @@
 <?php
-//Include the DEFINES and boo the system
+//Include the DEFINES and boot the system
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_BootCompleteSystem.php');
 
@@ -7,7 +7,7 @@ if(isset($_POST)) {
 	echo 'A form has been submitted';
 }
 
-echo PVForms::formBegin();
+echo PVForms::formBegin('myform');
 
 echo PVForms::label('Name', array('for'=>'name'));
 echo PVForms::text('name');
@@ -16,7 +16,7 @@ echo PVForms::label('Email', array('for'=>'email'));
 echo PVForms::email('email');
 
 echo PVForms::label('Password', array('for'=>'password'));
-echo PVForms::email('password');
+echo PVForms::password('password');
 
 $select_options = array(
 	'stake' => 'Stake',
@@ -33,8 +33,15 @@ echo PVForms::file('mugshot');
 
 echo PVForms::label('Send Mugshot to police', array('for'=>'mugshot'));
 echo '<div>';
-echo PVForms::radio('mugshot', array('value' => 'yes'));
-echo PVForms::radio('mugshot', array('value' => 'no'));
+echo PVForms::radio('mugshot', array('value' => 'yes'), array('disable_css'=>true)).'Yes';
+echo PVForms::radio('mugshot', array('value' => 'no'), array('disable_css'=>true)).'No';
 echo '</div>';
 
-echo PVForm::formEnd();
+echo '<p>Check to agree to the terms you never actually read</p>';
+echo PVForms::checkbox('agree');
+
+echo PVForms::hidden('invisible-man', array('value' => 'You cannot see me'));
+
+echo PVForms::submit('submit-form');
+
+echo PVForms::formEnd();

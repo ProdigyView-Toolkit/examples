@@ -3,7 +3,7 @@
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_BootCompleteSystem.php');
 
-//Create an object with no methods or functions
+//Create an object with no methods or variables
 class EmptyObject extends PVObject {
 	
 }
@@ -32,7 +32,6 @@ $empty -> addToCollectionWithName('Destiny', 'Destiny has sent you a chain lette
 $empty -> darrel = 'You sent Darrel the wrong email <br />';
 
 //Call the functions that were added
-
 $empty -> open();
 $empty -> write('Mom', 'Hey mom how are you??');
 

@@ -41,7 +41,7 @@ foreach ($array_4 as $key => $value) {
 }
 
 //Functions is a segment of code that can be called to perform a certain task. Functions can have variables,
-//arrays and calles to other functions inside of them
+//arrays and calls to other functions inside of them
 
 function add($value1, $value2) {
 	$value3 = $value1 + $value2;
