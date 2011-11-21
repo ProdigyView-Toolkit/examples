@@ -1,6 +1,6 @@
 <?php
 //Include the DEFINES and boo the system
-include_once('../DEFINES.php');
+include_once('../../DEFINES.php');
 require_once(PV_CORE.'_BootCompleteSystem.php');
 
 //Create an array with the required information that pertains

@@ -26,23 +26,23 @@ define('PV_ERROR_LOG', PV_ROOT.'/tmp/'.'logs'.DS.'error.log');
 //Define Template Directory
 define('PV_TEMPLATES', PV_ROOT.DS.'resources'.DS.'templates'.DS);
 //Define Javascript ROOT
-define('PV_JAVASCRIPT', 'resources/javascript/');
+define('PV_JAVASCRIPT', '/resources/javascript/');
 //Define JQuery Root
-define('PV_ADMIN_JAVASCRIPT', 'resources/javascript/');
+define('PV_ADMIN_JAVASCRIPT', '/resources/javascript/');
 //Define JQuery Root
-define('PV_JQUERY', 'resources/jquery/');
+define('PV_JQUERY', '/resources/jquery/');
 //Define Prototype Root
-define('PV_ADMIN_JQUERY', 'resources/jquery/');
+define('PV_ADMIN_JQUERY', '/resources/jquery/');
 //Define Prototype Root
-define('PV_PROTOTYPE', 'resources/prototype/');
+define('PV_PROTOTYPE', '/resources/prototype/');
 //Define Prototype Root
-define('PV_ADMIN_PROTOTYPE', 'resources/prototype/');
+define('PV_ADMIN_PROTOTYPE', '/resources/prototype/');
 //Define Mootools Root
-define('PV_MOOTOOLS', 'resources/mootools/');
+define('PV_MOOTOOLS', '/resources/mootools/');
 //Define Mootools Root
-define('PV_ADMIN_MOOTOOLS', 'resources/mootools/');
+define('PV_ADMIN_MOOTOOLS', '/resources/mootools/');
 //Define CSS Root
-define('PV_CSS', 'resources/css/');
+define('PV_CSS', '/resources/css/');
 //Define CSS Root
 define('PV_ADMIN_CSS', 'resources/css/');
 //Define Image Direcoty
