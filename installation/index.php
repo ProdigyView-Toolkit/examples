@@ -1,10 +1,11 @@
 <?php
 ini_set('display_errors','On');
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL);
 
 include('../DEFINES.php');
 
-require_once(PV_CORE.'_BootInstallComponents.php');
+require_once(PV_CORE.'_classLoader.php');
+PVDatabase::init();
 
 
 
@@ -15,12 +16,15 @@ require_once(PV_CORE.'_BootInstallComponents.php');
 </head>
 <body>
 <?php
+
 if(isset($_POST['install'])){
+
 	$status=$_POST['status'];
-	include('script.php');
+	PVDatabase::setDatabase();
 	$database_type=PVDatabase::getDatabaseType();
+	include('script.php');
 	$sql_array="";
-		
+	
 	if($database_type=="mysql"){
 		$sql_array=$mysql_installation_array;
 	}
@@ -82,7 +86,7 @@ if(isset($_POST['install'])){
 
 }
 ?>
-<form method="post" action="<?php echo $PHP_SELF;?>">
+<form method="post" action="<?php echo $_SERVER['REQUEST_URI'];?>">
 <h1>ProdigyView Installer</h1>
 
 <p>Welcome to the ProdigyView installer. Please make sure the following is in place before running the installer.</p>
