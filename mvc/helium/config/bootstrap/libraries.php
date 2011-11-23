@@ -5,3 +5,8 @@
 
 $library_configuration = array();
 PVLibraries::init($library_configuration);
+
+PVLibraries::addLibrary('he2_alert');
+
+
+PVLibraries::loadLibraries();

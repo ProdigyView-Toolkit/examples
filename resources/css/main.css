@@ -103,8 +103,18 @@
 	height: 1%;
 }
 
-.admin-team-results {
-	float: left;
-	width: 45%;
-	margin-right: 20px;
+.error-message, .success-message {
+	border: 1px solid;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+.error-message {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.success-message {
+	color: #4F8A10;
+	background-color: #DFF2BF;
 }

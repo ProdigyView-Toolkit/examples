@@ -11,8 +11,12 @@ class Comments extends Model {
 	
 	public $validators=array(
 		'comment'=>array(
-			'notempty'=>array('error'=>'Post must have a title.')
+			'notempty'=>array('error'=>'Comment must have text')
 		),
+	);
+	
+	public $joins = array(
+		'users' => array('table' => 'users', 'type' => 'natural')
 	);
 
 }

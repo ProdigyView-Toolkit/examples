@@ -64,7 +64,7 @@ Abstract Class Model extends PVObject {
 					
 					if(!PVValidator::check($key,$data[$field])){
 						$hasError=false;
-						$this->errors[$field][]=$rule['error'];
+						$this->errors[$field][]=PVTemplate::errorMessage($rule['error']);
 					}
 					
 				}//end second foreach
@@ -326,6 +326,15 @@ Abstract Class Model extends PVObject {
 		
 		return false;
 	}//end sync
+	
+	public function error($error_name) {
+		if (isset($this -> registry -> errors[$error_name])) {
+			foreach ($this->registry->errors[$error_name] as $error) {
+				echo $error;
+			}//end foreach
+		}
+
+	}//endError
 	
 	private function getModelDefaults() {
 		$defaults=array();

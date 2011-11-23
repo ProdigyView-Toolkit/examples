@@ -21,6 +21,7 @@ $boot_options = array(
 	'load_configuration' => false,
 	'load_database' => true, 
 	'load_database_profile' => 0, 
+	'config' => array('report_errors' => true)
 );
 
 PVBootstrap::bootSystem($boot_options);
