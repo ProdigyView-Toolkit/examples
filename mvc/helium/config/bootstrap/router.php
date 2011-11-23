@@ -32,5 +32,7 @@ PVRouter::addRouteRule(array('rule'=>'/register', 'route'=>array('controller'=>'
 PVRouter::addRouteRule(array('rule'=>'/users/logout', 'redirect'=>'/logout'));
 PVRouter::addRouteRule(array('rule'=>'/logout', 'route'=>array('controller'=>'users', 'action'=>'logout')));
 
+PVRouter::addRouteRule(array('rule'=>'/rss', 'route'=>array('controller'=>'post', 'action'=>'rss')));
+
 //Retrict Routes by access levels
 PVRouter::addRouteRule(array('rule'=>'/post/add', 'access_level'=>1, 'access_level_redirect'=>'/users/login'));

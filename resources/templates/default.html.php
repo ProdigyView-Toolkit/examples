@@ -14,6 +14,7 @@
 				<h1>
 					Helium Example Blog
 				</h1>
+				<?php echo PVHtml::strong('It\'s lighter than Lithium'); ?>
 			</div>
 			<div id="navigation">
 				<ul>
@@ -43,7 +44,8 @@
 					<?php echo PVHtml::alink('ProdigyView', 'http://www.prodigyview.com'); ?><br />
 				</div>
 				<div id="footer">
-					Copyright © Site name, 20XX
+					<?php echo PVHtml::alink('RSS Feed', '/rss');?>
+					- Copyright © Site name, 20XX
 				</div>
 			</div>
 		</div>

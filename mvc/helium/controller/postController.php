@@ -65,6 +65,14 @@ Class postController Extends Controller {
 
 		$this -> registry -> template -> post = $post;
 	}
+	
+	public function rss() {
+		$posts = new Post($this -> registry);
+		$posts -> find();
+
+		$this->_renderLayout(array('prefix' => 'rss', 'type' => 'xml'));
+		$this -> registry -> template -> posts = $posts -> getIterator();
+	}
 
 }
 ?>
