@@ -11,9 +11,9 @@ define('PV_APPLICATIONS', PV_ROOT.DS.'apps'.DS.'front'.DS);
 define('PV_ADMIN_APPLICATIONS', PV_ROOT.DS.'apps'.DS.'admin'.DS);
 //Define Modules Directory
 define('PV_MODULES',  PV_ROOT.DS.'modules'.DS);
-//Define Plugins Directory
+//Define Libraries Directory
 define('PV_LIBRARIES',  PV_ROOT.DS.'resources'.DS.'libraries'.DS);
-//Define Configuartion Directory
+//Define Plugins Directory
 define('PV_PLUGINS',  PV_ROOT.DS.'plugins'.DS);
 //Define MVC Directory
 define('PV_MVC',  PV_ROOT.DS.'mvc'.DS);
@@ -25,25 +25,25 @@ define('PV_DB_CONFIG', PV_ROOT.'/config/config.php');
 define('PV_ERROR_LOG', PV_ROOT.'/tmp/'.'logs'.DS.'error.log');
 //Define Template Directory
 define('PV_TEMPLATES', PV_ROOT.DS.'resources'.DS.'templates'.DS);
-//Define Javascript ROOT
+//Define Javascript Directory
 define('PV_JAVASCRIPT', '/resources/javascript/');
-//Define JQuery Root
+//Define Admin Directory
 define('PV_ADMIN_JAVASCRIPT', '/resources/javascript/');
-//Define JQuery Root
+//Define JQuery Directory
 define('PV_JQUERY', '/resources/jquery/');
-//Define Prototype Root
+//Define JQuery Admin Directory
 define('PV_ADMIN_JQUERY', '/resources/jquery/');
-//Define Prototype Root
+//Define Prototype Directory
 define('PV_PROTOTYPE', '/resources/prototype/');
-//Define Prototype Root
+//Define Prototype Admin Directory
 define('PV_ADMIN_PROTOTYPE', '/resources/prototype/');
-//Define Mootools Root
+//Define Mootools Directory
 define('PV_MOOTOOLS', '/resources/mootools/');
-//Define Mootools Root
+//Define Mootools Admin Directory
 define('PV_ADMIN_MOOTOOLS', '/resources/mootools/');
-//Define CSS Root
+//Define CSS Directory
 define('PV_CSS', '/resources/css/');
-//Define CSS Root
+//Define CSS Admin Directory
 define('PV_ADMIN_CSS', 'resources/css/');
 //Define Image Direcoty
 define('PV_IMAGE', '/media/images/');
