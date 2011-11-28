@@ -24,7 +24,7 @@ include_once(PV_CORE.'_classLoader.php');
  */
 
 $boot_options= array(
-	'initialiaze_database' => FALSE,//If set to true, that database will be initialized and a connection made to the default database
+	'initialize_database' => FALSE,//If set to true, that database will be initialized and a connection made to the default database
 	'initialize_libraries' => TRUE, //If set to true, the libraries class will be initialized
 	'load_plugins' => FALSE,		//If set to true, the plugins in the database be loaded. Requires a database.
 	'load_configuration' => FALSE,	//If set to true, the xml configuration file will be loadeded and used as a the configuration

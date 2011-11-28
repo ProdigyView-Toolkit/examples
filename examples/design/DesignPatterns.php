@@ -1,7 +1,8 @@
 <?php
-//Include the DEFINES and boo the system
+//Only the class loader is needed because no database connection
+//or supporting libraries are needed
 include_once ('../../DEFINES.php');
-require_once (PV_CORE . '_BootCompleteSystem.php');
+require_once (PV_CORE . '_classLoader.php');
 
 /**
  * This tutorial is for mixing the design patterns to make functions and classes

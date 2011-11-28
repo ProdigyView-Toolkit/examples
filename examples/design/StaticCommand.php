@@ -1,4 +1,8 @@
 <?php
+//Turn on error reporting
+ini_set('display_errors','On');
+error_reporting(E_ALL); 
+
 //Only the class loader is needed because no database connection
 //or supporting libraries are needed
 include_once ('../../DEFINES.php');
@@ -9,7 +13,7 @@ require_once (PV_CORE . '_classLoader.php');
  * PVApplication extends PVObject which extends PVPatterns so you will
  * have a lot of tools are your disposal.
  */
-class ColorPicker extends PVApplication {
+class ColorPicker extends PVStaticApplication {
 
 	protected function blue() {
 		return '0000ff';

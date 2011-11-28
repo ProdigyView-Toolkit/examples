@@ -1,7 +1,12 @@
 <?php
-//Include the DEFINES and boo the system
-include_once('../../DEFINES.php');
-require_once(PV_CORE.'_BootCompleteSystem.php');
+//Turn on error reporting
+ini_set('display_errors','On');
+error_reporting(E_ALL); 
+
+//Only the class loader is needed because no database connection
+//or supporting libraries are needed
+include_once ('../../DEFINES.php');
+require_once (PV_CORE . '_classLoader.php');
 
 class StalkerBook {
 	
