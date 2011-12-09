@@ -18,7 +18,7 @@ class Run extends PVStaticObject{
 		
 		$miles = self::_applyFilter(get_class(), __FUNCTION__, $miles, array('event' => 'args'));
 		
-		$return ='I ran '.$miles. ' today';
+		$return ='I ran '.$miles. ' miles today';
 		
 		self::_notify(get_class() . '::' . __FUNCTION__, $miles, $return);
 		$return = self::_applyFilter(get_class(), __FUNCTION__, $return, array('event' => 'return'));

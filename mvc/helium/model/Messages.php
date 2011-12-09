@@ -1,7 +1,7 @@
 <?php
 class Comments extends Model {
 
-	public $schema = array(
+	protected $_schema = array(
 		'message_id' => array('type' => 'int', 'primary_key' => true, 'auto_increment' => true),
 		'receiver_id' => array('type' => 'int', 'default' => 0),
 		'sender_id' => array('type' => 'int', 'default' => 0),
@@ -9,7 +9,7 @@ class Comments extends Model {
 		'date_sent' => array('type' => 'timestamp', 'default' => "now()"), 
 	);
 	
-	public $validators=array(
+	protected $_validators=array(
 		'message'=>array(
 			'notempty'=>array('error'=>'Post must have a title.')
 		),

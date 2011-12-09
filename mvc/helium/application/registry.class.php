@@ -1,6 +1,6 @@
 <?php
 
-Class Registry {
+Class Registry extends He2Object {
 
 	private $vars = array();
 

@@ -25,6 +25,11 @@ $schema = PVDatabase::getSchema();
 echo $schema;
 echo '<br />';
 
+$table = 'temptable';
+$table_formated = PVDatabase::formatTableName($table);
+echo $table_formated;
+echo '<br />';
+
 /**
  * Requries a live connection and a real table. Pagination offset can performaned using this function below.
  * 

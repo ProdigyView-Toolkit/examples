@@ -1,6 +1,6 @@
 <?php
 
-Abstract Class Model extends PVObject {
+Abstract Class Model extends He2Object {
 		
 	protected $registry;
 	protected $errors;
@@ -10,21 +10,35 @@ Abstract Class Model extends PVObject {
 	);
 
 	function __construct($registry=null) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $registry);
+		
+		$registry= self::_applyFilter(get_class(), __FUNCTION__, $registry, array('event' => 'args'));
+		$registry= self::_applyFilter(get_called_class(), __FUNCTION__, $registry, array('event' => 'args'));
+		
 		if ($registry==null)
 			$this->registry=new PVCollection();
 		else
 			$this->registry = $registry;
 		
+		self::_notify(get_class() . '::' . __FUNCTION__, $registry);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $registry);
+		
 	}
 	
 	protected function checkSchema() {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
+		
 		$table_name=$this->formTableName(get_class($this));
 		$tablename=PVDatabase::formatTableName(strtolower($table_name));
 		
-		if(!PVDatabase::tableExist($tablename) && isset($this->schema) && $this->config['create_table']){
+		if(!PVDatabase::tableExist($tablename) && isset($this->_schema) && $this->config['create_table']){
 			$primary_keys='';
 			$first=1;
-			$schema=$this->schema;
+			$schema=$this->_schema;
 				
 			foreach($schema as $key => $value) {
 				if(isset($value['primary_key'])){
@@ -37,13 +51,15 @@ Abstract Class Model extends PVObject {
 			
 			$options=array('primary_key'=>$primary_keys);
 			PVDatabase::createTable($tablename, $schema ,$options);
-		} else if(isset($this->schema) && $this->config['column_check']) {
-			$schema=$this->schema;
+		} else if(isset($this->_schema) && $this->config['column_check']) {
+			$schema=$this->_schema;
 			
 			foreach($schema as $key => $value) {
 				if(!PVDatabase::columnExist($tablename, $key)){
 					if(isset($value['default']) && empty($value['default']) &&  !($value['default']===0))
 						$value['default']='\'\'';
+					else if(isset($value['default']) && $value['type']=='string')
+						$value['default']='\''.$value['default'].'\'';
 					
 					PVDatabase::addColumn($tablename, $key, $value);
 				}
@@ -51,14 +67,20 @@ Abstract Class Model extends PVObject {
 		}
 	}//end checkSchema
 	
-	protected function validate($data){
+	protected function validate($data) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $data);
+		
+		$data = self::_applyFilter(get_class(), __FUNCTION__, $data, array('event' => 'args'));
+		$data = self::_applyFilter(get_called_class(), __FUNCTION__, $data, array('event' => 'args'));
 		
 		$hasError=true;
 		$this->errors=array();
 		
-		if(!empty($this->validators)){
+		if(!empty($this->_validators)){
 			
-			foreach($this->validators as $field=>$rules){
+			foreach($this->_validators as $field=>$rules){
 				
 				foreach($rules as $key=>$rule){
 					
@@ -74,10 +96,27 @@ Abstract Class Model extends PVObject {
 		
 		$this->registry->errors=$this->errors;
 		
+		self::_notify(get_class() . '::' . __FUNCTION__, $hasError, $data);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $hasError, $data);
+		
 		return $hasError;
 	}//end validate
 	
-	public function create($data) {
+	public function create($data, $options = array()) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $data);
+		
+		$filtered = self::_applyFilter(get_class(), __FUNCTION__, array('data' => $data, 'options' => $options), array('event' => 'args'));
+		$data = $filtered['data'];
+		$options = $filtered['options'];
+		
+		$filtered = self::_applyFilter(get_called_class(), __FUNCTION__, array('data' => $data, 'options' => $options), array('event' => 'args'));
+		$data = $filtered['data'];
+		$options = $filtered['options'];
+		
+		$created = false;
+		$id = 0;
 		$this->checkSchema();
 		
 		if($this->validate($data)) {
@@ -90,7 +129,7 @@ Abstract Class Model extends PVObject {
 			$primary_keys=array();
 			$auto_incremented_field='';
 			
-			foreach($this->schema as $field => $field_options){
+			foreach($this->_schema as $field => $field_options){
 				$field_options += $this->getFieldOptionsDefaults();
 				$input_data[$field]=(empty($data[$field])) ? $field_options['default'] : $data[$field];
 				
@@ -117,14 +156,29 @@ Abstract Class Model extends PVObject {
 				);
 				
 				$this->first($conditions);
-				return true;
+				$created = true;
 			}
 		}
 		
-		return false;
+		self::_notify(get_class() . '::' . __FUNCTION__, $created, $id, $data, $options);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $created, $id, $data, $options);
+		
+		return $created;
 	}
 	
 	public function update($data, $conditions = array()) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $data, $conditions);
+		
+		$filtered = self::_applyFilter(get_class(), __FUNCTION__, array('data' => $data, 'conditions' => $conditions), array('event' => 'args'));
+		$data = $filtered['data'];
+		$conditions = $filtered['conditions'];
+		
+		$filtered = self::_applyFilter(get_called_class(), __FUNCTION__, array('data' => $data, 'conditions' => $conditions), array('event' => 'args'));
+		$data = $filtered['data'];
+		$conditions = $filtered['conditions'];
+		$result = false;
 		
 		if($this->validate($data)) {
 			$table_name=$this->formTableName(get_class($this));
@@ -136,14 +190,14 @@ Abstract Class Model extends PVObject {
 			$primary_key='';
 			$wherelist=array();	
 			
-			foreach($this->schema as $field => $field_options) {
+			foreach($this->_schema as $field => $field_options) {
 				$field_options += $this->getFieldOptionsDefaults();
 				if($field_options['primary_key']){
 					$primary_key=$field;
 					$wherelist[$field]=(!empty($this->_collection->$field)) ? $field_options['default'] : $this->_collection->$field;
 				} 
 				
-				$input_data[$field]=(empty($data[$field])) ? $field_options['default'] : $data[$field];
+				$input_data[$field]=(!isset($data[$field])) ? $this->$field : $data[$field];
 					
 			}//end foreach
 			
@@ -152,21 +206,40 @@ Abstract Class Model extends PVObject {
 			$this->addToCollection($input_data);
 			
 			$this->sync();
-			
-			return $result;
 		}
 
-		return false;
+		self::_notify(get_class() . '::' . __FUNCTION__, $result, $data, $conditions);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $result, $data, $conditions);
+		
+		return $result;
 	}//end update
 	
 	public function delete($data) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $data);
+		
+		$data = self::_applyFilter(get_class(), __FUNCTION__, $data, array('event' => 'args'));
+		$data = self::_applyFilter(get_called_class(), __FUNCTION__, $data, array('event' => 'args'));
+		
 		$table_name=$this->formTableName(get_class($this));
 		$table_name=PVDatabase::formatTableName(strtolower($table_name));
 		
-		return PVDatabase::preparedDelete($table_name, $data, $whereformats='');
+		$result = PVDatabase::preparedDelete($table_name, $data, $whereformats='');
+		self::_notify(get_class() . '::' . __FUNCTION__, $result, $data);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $result, $data);
+		
+		return $result;
 	}//end delete
 	
 	public function first($conditions=array()){
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $conditions);
+		
+		$conditions = self::_applyFilter(get_class(), __FUNCTION__, $conditions, array('event' => 'args'));
+		$conditions = self::_applyFilter(get_called_class(), __FUNCTION__, $conditions, array('event' => 'args'));
+		
 		$this->checkSchema();
 		
 		$defaults=array(
@@ -178,11 +251,11 @@ Abstract Class Model extends PVObject {
 		$input_data=array();
 		$query='SELECT * FROM '.$table_name.' ';
 		
-		if(isset($conditions['join']) && isset($this->joins)) {
+		if(isset($conditions['join']) && isset($this->_joins)) {
 			foreach($conditions['join'] as $join) {
 					
-				if(isset($this->joins[$join]))
-					$query.=$this->joinTable($this->joins[$join]).' ';
+				if(isset($this->_joins[$join]))
+					$query.=$this->joinTable($this->_joins[$join]).' ';
 				
 			}//end foreach
 		}
@@ -215,9 +288,19 @@ Abstract Class Model extends PVObject {
 			if(!PVValidator::isInteger($key))
 				$this->addToCollectionWithName($key, $value);
 		}
+		
+		self::_notify(get_class() . '::' . __FUNCTION__, $conditions);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $conditions);
 	}
 	
-	public function find($conditions=array()){
+	public function find($conditions=array()) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $conditions);
+		
+		$conditions = self::_applyFilter(get_class(), __FUNCTION__, $conditions, array('event' => 'args'));
+		$conditions = self::_applyFilter(get_called_class(), __FUNCTION__, $conditions, array('event' => 'args'));
+		
 		$this->checkSchema();
 		
 		$table_name=$this->formTableName(get_class($this));
@@ -225,11 +308,11 @@ Abstract Class Model extends PVObject {
 		$input_data=array();
 		$query='SELECT * FROM '.$table_name.' ';
 		
-		if(isset($conditions['join']) && isset($this->joins)) {
+		if(isset($conditions['join']) && isset($this->_joins)) {
 			foreach($conditions['join'] as $join) {
 					
-				if(isset($this->joins[$join]))
-					$query.=$this->joinTable($this->joins[$join]).' ';
+				if(isset($this->_joins[$join]))
+					$query.=$this->joinTable($this->_joins[$join]).' ';
 				
 			}//end foreach
 		}
@@ -263,10 +346,18 @@ Abstract Class Model extends PVObject {
 			$this->addToCollection($row);
 		}
 		
-		
+		self::_notify(get_class() . '::' . __FUNCTION__, $conditions);
+		self::_notify(get_called_class() . '::' . __FUNCTION__, $conditions);
 	}
 	
 	protected function joinTable($args=array()) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $args);
+		
+		$args = self::_applyFilter(get_class(), __FUNCTION__, $args, array('event' => 'args'));
+		$args = self::_applyFilter(get_called_class(), __FUNCTION__, $args, array('event' => 'args'));
+		
 		$defaults=array(
 			'type'=>'natural',
 			'alias'=>'',
@@ -307,11 +398,15 @@ Abstract Class Model extends PVObject {
 	}
 	
 	public function sync() {
-		if(!isset($this->schema)) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
+		
+		if(!isset($this->_schema)) {
 			return false;	
 		}
 		$keys=array();
-		foreach($this->schema as $key => $value) {
+		foreach($this->_schema as $key => $value) {
 			$value += $this->getFieldOptionsDefaults();
 			
 			if($value['primary_key']) {
@@ -328,6 +423,13 @@ Abstract Class Model extends PVObject {
 	}//end sync
 	
 	public function error($error_name) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $error_name);
+		
+		$error_name = self::_applyFilter(get_class(), __FUNCTION__, $error_name, array('event' => 'args'));
+		$error_name = self::_applyFilter(get_called_class(), __FUNCTION__, $error_name, array('event' => 'args'));
+		
 		if (isset($this -> registry -> errors[$error_name])) {
 			foreach ($this->registry->errors[$error_name] as $error) {
 				echo $error;
@@ -337,10 +439,14 @@ Abstract Class Model extends PVObject {
 	}//endError
 	
 	private function getModelDefaults() {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
+		
 		$defaults=array();
 		
-		if(isset($this->schema)) {
-			foreach($this->schema as $key => $value) {
+		if(isset($this->_schema)) {
+			foreach($this->_schema as $key => $value) {
 				$defaults[$key]=(isset($this->data->$key))? $this->data->$key: @$value['default'];
 			}
 		}
@@ -349,6 +455,10 @@ Abstract Class Model extends PVObject {
 	
 	
 	private function getFieldOptionsDefaults() {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
+		
 		$defaults=array(
 			'primary_key'=>false,
 			'unique'=>false,
@@ -361,6 +471,13 @@ Abstract Class Model extends PVObject {
 	}
 
 	private function formTableName($name) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $name);
+		
+		$name = self::_applyFilter(get_class(), __FUNCTION__, $name, array('event' => 'args'));
+		$name = self::_applyFilter(get_called_class(), __FUNCTION__, $name, array('event' => 'args'));
+		
 		preg_match_all('/[A-Z][^A-Z]*/',$name ,$results);
 		$table='';
 		foreach($results[0] as $key=>$part){

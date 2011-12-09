@@ -1,6 +1,6 @@
 <?php
 
-Abstract Class Controller {
+Abstract Class Controller extends He2Object {
 
 	protected $registry;
 	
@@ -13,7 +13,8 @@ Abstract Class Controller {
 		
 		$default_template = array(
 			'type' => 'html',
-			'extension' =>'php'
+			'extension' =>'php',
+			'disable' => false,
 		);
 		
 		$this->template = $default_template;
@@ -21,7 +22,8 @@ Abstract Class Controller {
 		$default_layout = array(
 			'prefix' => 'default',
 			'type' => 'html',
-			'extension' =>'php'
+			'extension' =>'php',
+			'disable' => false,
 		);
 		
 		$this->template = $default_template;

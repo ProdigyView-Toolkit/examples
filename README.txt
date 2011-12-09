@@ -4,6 +4,13 @@ Core Version 1.5.0
 Before you start
 This is only a sample system designed to give an idea of how the framework functions. You may modify the structure as you please but please leave the core intact as is.
 
+
+Git
+
+If the code was pulled using git, remember to do:
+git submodule init
+git sumbodule update --recursive
+
 Installation
 
 1). Set up a database(Mysql, Postgresql, SQL Server). You will need the following information:

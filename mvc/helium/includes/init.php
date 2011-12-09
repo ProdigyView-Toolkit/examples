@@ -1,22 +1,26 @@
 <?php
+
  /*** include the controller class ***/
- include __SITE_PATH . '/application/' . 'controller.class.php';
+ include SITE_PATH . '/application/' . 'object.class.php';
+ 
+ /*** include the controller class ***/
+ include SITE_PATH . '/application/' . 'controller.class.php';
 
  /*** include the registry class ***/
- include __SITE_PATH . '/application/' . 'registry.class.php';
+ include SITE_PATH . '/application/' . 'registry.class.php';
 
  /*** include the router class ***/
- include __SITE_PATH . '/application/' . 'router.class.php';
+ include SITE_PATH . '/application/' . 'router.class.php';
 
  /*** include the template class ***/
- include __SITE_PATH . '/application/' . 'template.class.php';
+ include SITE_PATH . '/application/' . 'template.class.php';
  
   /*** include the template class ***/
- include __SITE_PATH . '/application/' . 'model.class.php';
+ include SITE_PATH . '/application/' . 'model.class.php';
  
  function loadModels($class) {
 	$filename = $class. '.php';
-	$file =__SITE_PATH.'model'.DS.$filename;
+	$file = SITE_PATH.'model'.DS.$filename;
 	
 	if (!file_exists($file)) {
 		return false;

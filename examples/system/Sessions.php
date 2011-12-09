@@ -2,7 +2,7 @@
 //Include the DEFINES and boot on the core componets.
 //Do not initialize the session, that will be done manually
 include_once ('../../DEFINES.php');
-require_once (PV_CORE . '_BootCoreComponents.php');
+require_once (PV_CORE . '_classLoader.php');
 PVBootstrap::bootSystem(array('initialize_session' => false));
 
 //Set A few session arguements and initialize the session
@@ -69,3 +69,5 @@ echo '<p>Hashed Session Accessed through readSession: ' . PVSession::readSession
 PVSession::deleteSession($session_name, $options);
 echo '<p>Session Deleted... ' . PVSession::readSession($session_name, $options) . '</p>';
 echo '<hr />';
+
+print_r($_COOKIE);

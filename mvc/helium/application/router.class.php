@@ -1,6 +1,6 @@
 <?php
 
-class Router {
+class Router extends He2Object {
 	
 	private $registry;
 

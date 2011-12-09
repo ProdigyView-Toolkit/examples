@@ -1,6 +1,6 @@
 <?php
 
-Class Template extends PVObject {
+Class Template extends He2Object {
 
 	private $registry;
 	private $request;
@@ -8,6 +8,18 @@ Class Template extends PVObject {
 	private $vars = array();
 
 	function __construct($registry, $request) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $registry, $request);
+		
+		$filtered = self::_applyFilter(get_class(), __FUNCTION__, array('registry' => $registry, 'request' => $request), array('event' => 'args'));
+		$registry = $filtered['registry'];
+		$request = $filtered['request'];
+		
+		$filtered = self::_applyFilter(get_called_class(), __FUNCTION__, array('registry' => $registry, 'request' => $request), array('event' => 'args'));
+		$registry = $filtered['registry'];
+		$request = $filtered['request'];
+		
 		$this -> registry = $registry;
 		$this -> request = $request;
 
@@ -16,8 +28,12 @@ Class Template extends PVObject {
 	}
 
 	public function templateExtensionLoader($class) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $class );
+		
 		$filename = $class . '.php';
-		$file = __SITE_PATH . 'extensions' . DS . 'template' . DS . $filename;
+		$file = SITE_PATH . 'extensions' . DS . 'template' . DS . $filename;
 		if (!file_exists($file)) {
 			return false;
 		}
@@ -28,6 +44,10 @@ Class Template extends PVObject {
 	}
 
 	function loadTemplateExtensions() {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
+		
 		spl_autoload_register('templateExtensionLoader');
 	}
 
@@ -45,8 +65,19 @@ Class Template extends PVObject {
 	}
 
 	function show($view, $template) {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__, $view, $template);
+		
+		$filtered = self::_applyFilter(get_class(), __FUNCTION__, array('view' => $view, 'template' => $template), array('event' => 'args'));
+		$view = $filtered['view'];
+		$template = $filtered['template'];
+		
+		$filtered = self::_applyFilter(get_called_class(), __FUNCTION__, array('view' => $view, 'template' => $template), array('event' => 'args'));
+		$view = $filtered['view'];
+		$template = $filtered['template'];
 
-		$path = __SITE_PATH . '/views' . '/' . $view['view'] . '/' . $view['prefix'] . '.' . $view['type'] . '.' . $view['extension'];
+		$path = SITE_PATH . '/views' . '/' . $view['view'] . '/' . $view['prefix'] . '.' . $view['type'] . '.' . $view['extension'];
 
 		if (file_exists($path) == false) {
 			throw new Exception('Template not found in ' . $path);
@@ -54,10 +85,15 @@ Class Template extends PVObject {
 		}
 
 		$this -> tempate_path = $path;
-		include (PV_TEMPLATES. $template['prefix'] . '.' . $template['type'] . '.' . $template['extension']);
+		
+		if(!$template['disable'])
+			include (PV_TEMPLATES. $template['prefix'] . '.' . $template['type'] . '.' . $template['extension']);
 	}
 
 	function content() {
+		
+		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
+			return self::_callAdapter(get_called_class(), __FUNCTION__);
 
 		foreach ($this->vars as $key => $value) {
 			$$key = $value;

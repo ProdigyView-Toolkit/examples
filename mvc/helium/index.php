@@ -5,7 +5,7 @@
 
  /*** define the site path ***/
  $site_path = PV_MVC.'helium'.DS;
- define ('__SITE_PATH', $site_path);
+ define ('SITE_PATH', $site_path);
 
  /*** include the init.php file ***/
 
@@ -20,7 +20,7 @@
  $registry->router = new router($registry);
 
  /*** set the controller path ***/
- $registry->router->setPath (__SITE_PATH . '/controller');
+ $registry->router->setPath (SITE_PATH . '/controller');
  
  if(isset($_POST)){
  	$registry->post=$_POST;
