@@ -1,7 +1,12 @@
 <?php
+//Turn on error reporting
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+date_default_timezone_set('UTC');
+
 //Include the DEFINES and boot the system
 include_once ('../../DEFINES.php');
-require_once (PV_CORE . '_BootCoreComponents.php');
+require_once (PV_CORE . '_classLoader.php');
 PVBootstrap::bootSystem(array('initialize_libraries' => false, 'load_libraries' => false));
 
 //The first round of flipswitch should not run any functions because the library has
@@ -22,7 +27,7 @@ flipSwitch();
 //Add the same library except leave the extension blank to allow every
 //extension with .php to load
 PVLibraries::addLibrary('pv_switch');
-PVLibraries::loadLibraries();
+PVLibraries::loadLibrary('pv_switch');
 
 echo '<h1>Test 3</h1>';
 flipSwitch();

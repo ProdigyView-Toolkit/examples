@@ -5,7 +5,7 @@ include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_classLoader.php');
 PVBootstrap::bootSystem(array('initialize_session' => false));
 
-//Set A few session arguements and initialize the session
+//Set a few session arguements and initialize the session
 $session_args = array('session_lifetime' => 3000, 'cookie_lifetime' => 3000, );
 PVSession::init($session_args);
 

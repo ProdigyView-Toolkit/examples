@@ -2,7 +2,7 @@
 //Include the DEFINES and boot on the core componets.
 //Do not initialize any of the other classes, that will be done manually
 include_once('../../DEFINES.php');
-require_once(PV_CORE.'_BootCoreComponents.php');
+require_once(PV_CORE.'_classLoader.php');
 $boot_options=array(
 	'initialize_database'=>false,
 	'initialize_libraries'=>false,

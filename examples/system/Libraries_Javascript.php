@@ -1,7 +1,12 @@
 <?php
+//Turn on error reporting
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+date_default_timezone_set('UTC');
+
 //Include the DEFINES and boot the system
 include_once('../../DEFINES.php');
-require_once(PV_CORE.'_BootCompleteSystem.php');
+require_once(PV_CORE.'_classLoader.php');
 
 PVLibraries::enqueueJavascript('script1.js');
 PVLibraries::enqueueJavascript('script2.js');
@@ -55,6 +60,3 @@ foreach($css_files as $script) {
 $option_script = PVLibraries::getOpenscriptQueue();
 
 echo $option_script;
-
-//echo '<script type="text/javascript">'.$option_script.'</script>'."\n";
-

@@ -29,3 +29,15 @@ echo PVHtml::details($image);
 
 echo PVHtml::time('3:45');
 
+$list = PVHtml::li('Eggs');
+$list .= PVHtml::li('Bacon');
+$list .= PVHtml::li('Cheese');
+
+echo PVHtml::ol($list);
+echo PVHtml::ul($list);
+
+echo PVHtml::progress(30, 100);
+
+
+
+
