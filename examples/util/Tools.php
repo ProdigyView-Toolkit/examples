@@ -16,8 +16,8 @@ echo '<br />';
 
 //Truncate  string of text, strip any html tags and add a trailer too it.
 
-$string = '<strong>I want to talk about</strong> how nice it is today. Lets start with the sunshine!';
-$truncated = PVTools::truncateText($string, 12, '...Read More');
+$string = '<strong>I want to talk about</strong> how nice it is today. Lets start with the sunshine!</strong>';
+$truncated = PVTools::truncateText($string , 12, '...Read More');
 echo $truncated;
 
 echo '<br />';
@@ -32,16 +32,20 @@ echo '<br />';
 
 $url_parameters = array('controller' => 'blog', 'action' => 'view', 'id' => 1);
 
-echo PVTools::formUriParameters($url_parameters);
+echo PVTools::formUrlParameters($url_parameters);
 
 echo '<br />';
 
-echo PVTools::formUriPath($url_parameters);
+echo PVTools::formUrlPath($url_parameters);
 
 echo '<br />';
 
 $find = array('cat,', 'dog');
-$search = array('bat', 'mouse', 'cow', 'dog', 'goat');
+$search = array(
+	'animals' => array('bat', 'mouse', 'cow', 'dog', 'goat'),
+	'places' => array('paris', 'london', 'nigerea'),
+	'things' => array('shirt', 'ball', 'shelf')
+);
 
 $found = PVTools::arraySearchRecursive($find, $search);
 
