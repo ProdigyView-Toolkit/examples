@@ -1,5 +1,5 @@
 ProdigyView Sample System
-Core Version 1.5.1
+Core Version 1.5.2
 
 Before you start
 This is only a sample system designed to give an idea of how the framework functions. You may modify the structure as you please but please leave the core intact as is.
