@@ -19,7 +19,16 @@ PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_1.mp4');
 
 
 $output_options = array(
-	'output_'
+	'output_vcodec' => 'libtheora'
 );
 //Convert the video to new format and set save location
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.mp4');
+PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.ogv');
+
+
+$output_options = array(
+	'output_r' => '1',
+	'output_s'=> '4cif',
+	'output_f' => 'image2'
+);
+//Convert the video to new format and set save location
+PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'image-%3d.jpeg');
