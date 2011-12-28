@@ -9,8 +9,6 @@ include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_classLoader.php');
 
 $video_file = PV_ROOT.DS.'examples'.DS.'content'.DS.'example_files'.DS.'sample_video.mp4';
-echo $video_file.'<br />';
-echo PV_ROOT.PV_VIDEO.'sample1.mp4';
 
 //Path To your FFMPEG
 $ffmpeg = 'ffmpeg';
