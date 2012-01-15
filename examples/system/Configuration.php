@@ -13,6 +13,7 @@ $boot_options=array(
 	'initialize_session'=>false,
 	'load_plugins'=>false,
 	'load_configuration'=>false,
+	'load_database' => false,
 	'config'=>array('report_errors'=>true, 'log_errors'=>true, 'error_report_level'=>E_ALL)
 );
 

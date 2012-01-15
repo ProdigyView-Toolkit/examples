@@ -23,5 +23,24 @@ $args=array(
 //Install the Applications Information
 pv_installApplication($args);
 $app_info=pv_getApplication('helloworld_example');
-echo 'Application '.$app_info['app_name'].' is Installed';
+echo PVHtml::p( 'Application '.$app_info['app_name'].' is Installed');
+
+
+//Install a sample linkedin Application
+$args=array(
+	'app_name'=>'Linkedin', 				//Name of the Application
+	'app_unique_id'=>'linkedin', 			//The Application Identifer
+	'app_directory'=>'PVLinkedin/', 		//Applications Frontend Directory
+	'app_file'=>'PVLinkedIn.php', 			//Application File that has the applications object to be called
+	'app_object'=>'PVLinkedin', 			//The Applications' Object that s
+	'enabled'=>1,							//Make sure the application is enabled to make it callable
+	'application_language'=>'php',			//Set the application's language(php, java or objective-c)
+	'app_version'=>0.5,						//Set the applicaiton version
+	'app_site'=>'http://www.prodigyview.com',//Applicaiton ome page
+	'app_author'=>'ProdigyView Example Team'//Applications authors
+);
+//Install the Applications Information
+pv_installApplication($args);
+$app_info=pv_getApplication('linkedin');
+echo PVHtml::p('Application '.$app_info['app_name'].' is Installed');
 ?>

@@ -10,7 +10,19 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 	</head>
 	<body>
 		<?php
+		
 		//Set Content Variables
+		$args = array(
+			'content_type' => 'example_content_audio', 
+			'content_title' => 'A sampleImage', 
+			'content_description' => 'This is my first example content', 
+			'audio_src' => 'http://www.youtube.com/watch?v=Dm1Wr-BeGBE', 
+			'audio_length' => '10:21', 
+		);
+		
+		$content_id = PVContent::createAudioContent($args);
+		
+		//Set Content Variables With File and Conversion Options
 		$args = array(
 			'content_type' => 'example_content_audio', 
 			'content_title' => 'A sampleImage', 
@@ -18,33 +30,22 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 			'file_name' => 'My Sample Audio', 
 			'tmp_name' => 'example_files/sample_audio.mp3', 
 			'file_size' => filesize('example_files/sample_audio.mp3'), 
-			'file_type' => 'audio/mpeg', 
+			'file_type' => PVFileManager::getFileMimeType('example_files/sample_audio.mp3'),
 			'convert_to_ogg' => true, 
 			'convert_to_wav' => true, 
 		);
-		?>
-
-		<p>
-			Content fields that are going to be created: 			
-			<pre><?php print_r($args);?></pre>
-		</p>
-		<?php
-		//Create a Unique Alias
-		$content_alias = pv_createUniqueContentAlias('sample_alias');
-		//Add Alias to To Arguements
-		$args['content_alias'] = $content_alias;
-		//Create Image Content and Retrieve ID
-		$content_id = pv_createAudioContentWithFile($args);
+		
+		$content_id = PVContent::createAudioContentWithFile($args);
 		?>
 
 		<p>
 			Recently created content ID: <?php  echo $content_id;?>
 		</p>
 		<?php
-		//Search for content based on content_type
-		$search_args = array('content_type' => 'example_content_audio');
+		//Search for content based on content_type and file type
+		$search_args = array('content_type' => 'example_content_audio', 'file_type' => 'audio/mp3');
 		//Get the Content List
-		$content_list = pv_getContentAudioList($search_args);
+		$content_list = PVContent::getAudioContentList($search_args);
 		?>
 		<hr />
 		<p>
@@ -64,7 +65,7 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 			echo '<strong>Content ID:</strong> ' . $value['content_id'] . '<br />';
 			echo '<strong>Content Title:</strong> ' . $value['content_title'] . '<br />';
 			echo '<strong>Date Created:</strong> ' . $value['date_created'] . '<br /><br />';
-			echo '<strong>Audio Duration:</strong> ' . PVAudioRenderer::getDuration('example_files/sample_audio.mp3') . '<br /><br />';
+			echo '<strong>Audio Duration:</strong> ' . PVAudio::getDuration('example_files/sample_audio.mp3') . '<br /><br />';
 		}//end foreach
 
 		//Retrive the Content based upon the ID
@@ -79,17 +80,17 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 			Display the recently created image
 		</p>
 		<?php
-		//Display Image
+		//Display Audio Tag in HTML5
 		echo PVHtml::audio('', $content);
 
-		//Update the Content with the same values but only changing owner id
-		$content['owner_id'] = 5;
-		pv_updateAudioContent($content);
+		//Update the Content with the same values but only changing the audio length
+		$content['audio_length'] = '5:11';
+		PVContent::updateAudioContent($content);
 
 		//Delete Content
-		//pv_deleteContent($content_id);
+		//PVContent::deleteContent($content_id);
 
-		echo '<p>Image Content Example Finished</p>';
+		echo '<p>Audio Content Example Finished</p>';
 		?>
 	</body>
 </html>

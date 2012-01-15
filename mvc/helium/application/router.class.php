@@ -14,11 +14,11 @@ class Router extends He2Object {
 
 	public $action;
 
-	function __construct($registry) {
+	public function __construct($registry) {
 		$this -> registry = $registry;
 	}
 
-	function setPath($path) {
+	public function setPath($path) {
 
 		if (is_dir($path) == false) {
 			throw new Exception('Invalid controller path: `' . $path . '`');
@@ -27,6 +27,13 @@ class Router extends He2Object {
 		$this -> path = $path;
 	}
 
+	/**
+	 * Calls a controller based on the route and then passed the variables retrieved from the controller
+	 * to a view.
+	 * 
+	 * @return void
+	 * @access public
+	 */
 	public function loader() {
 		
 		$this -> getController();
@@ -48,6 +55,8 @@ class Router extends He2Object {
 		}
 		$vars = $controller -> $action();
 		
+		$this -> parseControllerVars($vars);
+		
 		$template = $controller -> getTemplate();
 		$layout = $controller -> getLayout();
 		
@@ -56,7 +65,31 @@ class Router extends He2Object {
 
 		$this -> registry -> template -> show($template, $layout);
 	}
+	
+	/**
+	 * Parse the variables retrieved from  the controllers and adds them to the registry.
+	 * The registray will pass the bariables to an array.
+	 * 
+	 * @param array $vars The variables retrieved from the controller and assed to the template registry
+	 * 
+	 * @return void
+	 * @access prviate
+	 */
+	private function parseControllerVars($vars) {
+		
+		if(is_array($vars)) {
+			foreach($vars as $key => $value) {
+				$this -> registry -> template -> $key = $value;
+			}
+		}
+	}
 
+	/**
+	 * Gets the controller based on the route and also sets the action retrieved from the route.
+	 * 
+	 * @return void
+	 * @access private
+	 */
 	private function getController() {
 
 		PVRouter::setRoute();

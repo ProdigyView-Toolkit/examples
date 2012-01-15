@@ -64,7 +64,20 @@ Class Template extends He2Object {
 		return $this -> vars[$index];
 	}
 
-	function show($view, $template) {
+	/**
+	 * Includes the view that will be displayed.
+	 * 
+	 * @param array $view Contains the arguements that define the view that will be displayed.
+	 * 			-'view' _string_: The folder that the view will reside in
+	 * 			-'prefix' _string_: The first part of the view. If the view is add.html.php, the add would be the prefix. Default value is index
+	 * 			-'type' _string_: The format for the view. The default is html.
+	 * 			-'exenstion' _string_: The extension of the view. The default extension is .php
+	 * @param array $template Contains the arguements that define the template that will be displayed
+	 * 			-'prefix' _string_: The first part of the template. The default value for the prefix is 'default'
+	 * 			-'type' _string_: The
+	 * 
+	 */
+	public function show($view, $template) {
 		
 		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
 			return self::_callAdapter(get_called_class(), __FUNCTION__, $view, $template);
@@ -90,7 +103,13 @@ Class Template extends He2Object {
 			include (PV_TEMPLATES. $template['prefix'] . '.' . $template['type'] . '.' . $template['extension']);
 	}
 
-	function content() {
+	/**
+	 * Displays the content in a view that will render in a template. Call this function once in the template folder.
+	 * 
+	 * @return void
+	 * @access public
+	 */
+	public function content() {
 		
 		if (self::_hasAdapter(get_called_class(), __FUNCTION__))
 			return self::_callAdapter(get_called_class(), __FUNCTION__);

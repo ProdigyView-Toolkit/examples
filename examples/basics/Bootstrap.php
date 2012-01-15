@@ -27,6 +27,7 @@ $boot_options= array(
 	'initialize_database' => FALSE,//If set to true, that database will be initialized and a connection made to the default database
 	'initialize_libraries' => TRUE, //If set to true, the libraries class will be initialized
 	'load_plugins' => FALSE,		//If set to true, the plugins in the database be loaded. Requires a database.
+	'load_database' => FALSE,		//If set to true, the database will be initialized
 	'load_configuration' => FALSE,	//If set to true, the xml configuration file will be loadeded and used as a the configuration
 	'config' => array(
 		'report_errors' => TRUE,		//Display errors as they occur

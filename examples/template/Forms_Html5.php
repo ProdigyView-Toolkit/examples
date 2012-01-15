@@ -48,7 +48,7 @@ echo PVForms::formBegin('myform', array('method' => 'post', 'enctype' => 'multip
 	echo PVForms::url('check_url');
 	
 	echo PVForms::label('Reset the Form');
-	echo PVForms::reset('Email Address');
+	echo PVForms::reset('reset_button');
 	
 	echo PVForms::label('Submit It');
 	echo PVForms::submit('submit');

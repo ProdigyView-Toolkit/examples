@@ -13,12 +13,25 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		//Set Content Variables
 		$args=array(
 			'content_type'=>'example_content_file',  
+			'content_title'=>'Some File Content', 
+			'content_description'=>'Information about a file',
+			'file_name'=>'A Sample File',
+			'file_src'=>'http://www.prodigyview.com/media/images/prodigyview_logo.png',
+		);
+		
+		$content_id = PVContent::createFileContent($args);
+		
+		PVContent::deleteContent($content_id);
+		
+		//Set Content Variables for creating a file with a file on disk
+		$args=array(
+			'content_type'=>'example_content_file',  
 			'content_title'=>'A Sample File', 
 			'content_description'=>'Have others download this zip file',
 			'file_name'=>'My File',
 			'tmp_name'=>'example_files/sample_document.zip',
 			'file_size'=>filesize('example_files/sample_document.zip'),
-			'file_type'=>'application/zip'
+			'file_type'=>PVFileManager::getFileMimeType('example_files/sample_document.zip')
 		);
 		?>
 		
@@ -26,11 +39,11 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<?php
 		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
+		$content_alias=PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias']=$content_alias;
-		//Create Image Content and Retrieve ID
-		$content_id=pv_createFileContentWithFile($args);
+		//Create File Content and Retrieve ID
+		$content_id=PVContent::createFileContentWithFile($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
@@ -39,7 +52,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		//Search for content based on content_type
 		$search_args=array('content_type'=>'example_content_file');
 		//Get the Content List
-		$content_list=pv_getContentFileList($search_args);
+		$content_list=PVContent::getFileContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -55,7 +68,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getFileContent($content_id);
+		$content=PVContent::getFileContent($content_id);
 		
 		//Get the Content Value
 		$content_title=$content['content_title'];
@@ -65,15 +78,16 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		<p>Display the recently created image</p>
 		
 		<?php
-		//Display Image
+		//Create a Link To The file
 		echo PVHtml::alink($content['content_title'], PV_FILE.$content['file_location']);
 		
-		//Update the Content with the same values but only changing owner id
-		$content['owner_id']=5;
-		pv_updateFileContent($content);
+		//Update the content and set the file to be downloadable and set a download limit
+		$content['file_downloadable']=1;
+		$content['file_max_downloads']=3;
+		PVContent::updateFileContent($content);
 		
 		//Delete Content
-		//pv_deleteContent($content_id);
+		PVContent::deleteContent($content_id);
 		
 		echo '<p>File Content Example Finished</p>';
 		?>

@@ -15,7 +15,7 @@ class HelloWorld{
 		if($command=='hijudy' || $command=='hellojudy'){
 			$this->sayHiToJudy($params);
 		}
-		else if($command=='seebob' || $command=='hi' ||  $params['bobparam']==true){
+		else if($command=='seebob' || $command=='hi' ||  (isset($params['bobparam']) && $params['bobparam']==true)){
 			$this->sayHiToBob();
 
 		}

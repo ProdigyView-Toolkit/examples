@@ -1,22 +1,27 @@
 <?php
 //Remember to include the DEFINES and to boot the system
-include_once('DEFINES.php');
-require_once(PV_CORE.'_BootCompleteSystem.php');
+include_once ('../../DEFINES.php');
+require_once (PV_CORE . '_classLoader.php');
+PVBootstrap::bootSystem(array('initialize_validator' => false));
+/**
+ * For these function to work, the hello world plugin must be installed first. Install it by running
+ * the HelloWorldPluginInstaller.php
+ */
 
-//Set Params to be Passed Through a Hook Call
-$params=array(
-	'name'=>'Bob',
-	'message'=>'Hello World'
-);
+callHelloWorldPlugin('I Want to say the the plugins class has many more capabilites beyond this');
 
-//Call a regular hook
-pv_callHook('example_hook', $params);
 
-//Call a hook that can ovveride a function
-if(!pv_hookOverride('hook-name', $params)){
-	callHelloWorldHook($params);
+if(PVValidator::check('isEqual', 1,2)){
+	echo PVHtml::p('They are equal');
+} else {
+	echo PVHtml::p('They are NOT equal');
 }
 
+if(PVValidator::check('isEqual', 1,1)){
+	echo PVHtml::p('They are equal');
+} else {
+	echo PVHtml::p('They are NOT equal');
+}
 
 
 ?>

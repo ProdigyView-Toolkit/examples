@@ -24,11 +24,11 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 		</p>
 		<?php
 		//Create a Unique Alias
-		$content_alias = pv_createUniqueContentAlias('sample_alias');
+		$content_alias = PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias'] = $content_alias;
 		//Create Content and Retrieve ID
-		$content_id = pv_createContent($args);
+		$content_id = PVContent::createContent($args);
 		?>
 
 		<p>
@@ -38,7 +38,7 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 		//Search for content based on content_type
 		$search_args = array('content_type' => 'example_content');
 		//Get the Content List
-		$content_list = pv_getContentList($search_args);
+		$content_list = PVContent::getContentList($search_args);
 		?>
 		<hr />
 		<p>
@@ -61,18 +61,18 @@ require_once (PV_CORE . '_BootCompleteSystem.php');
 		}//end foreach
 
 		//Retrive the Content based upon the ID
-		$content = pv_getContent($content_id);
+		$content = PVContent::getContent($content_id);
 		//Other way for Getting the Content
-		$content = pv_getContent(pv_getContentIDByContentAlias($content_alias));
+		$content = PVContent::getContent(PVContent::getContentIDByContentAlias($content_alias));
 		//Get the Content Value
 		$content_title = $content['content_title'];
 
 		//Update the Content with the same values but only changing owner id
 		$content['owner_id'] = 5;
-		pv_updateContent($content);
+		PVContent::updateContent($content);
 
 		//Delete Content
-		pv_deleteContent($content_id);
+		//PVContent::deleteContent($content_id);
 
 		echo '<p>Content Example Finished</p>';
 		?>

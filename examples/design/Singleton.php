@@ -1,4 +1,8 @@
 <?php
+//Turn on error reporting
+ini_set('display_errors','On');
+error_reporting(E_ALL); 
+
 //Only the class loader is needed because no database connection
 //or supporting libraries are needed
 include_once ('../../DEFINES.php');

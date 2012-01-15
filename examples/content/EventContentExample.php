@@ -25,20 +25,20 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<?php
 		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
+		$content_alias=PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias']=$content_alias;
 		//Create Content and Retrieve ID
-		$content_id=pv_createEventContent($args);
+		$content_id=PVContent::createEventContent($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
 		
 		<?php
 		//Search for content based on content_type
-		$search_args=array('content_type'=>'example_content_event');
+		$search_args=array('content_type'=>'example_content_event', 'event_city' => 'New York');
 		//Get the Content List
-		$content_list=pv_getContentEventList($search_args);
+		$content_list=PVContent::getEventContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -56,18 +56,18 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getContent($content_id);
+		$content=PVContent::getEventContent($content_id);
 		//Other way for Getting the Content
-		$content=pv_getEventContent(pv_getContentIDByContentAlias($content_alias));
+		$content=PVContent::getEventContent(PVContent::getContentIDByContentAlias($content_alias));
 		//Get the Content Value
 		$content_title=$content['content_title'];
 		
 		//Update the Content with the same values but only changing owner id
-		$content['owner_id']=5;
-		pv_updateEventContent($content);
+		$content['event_city'] = 'Chicago';
+		PVContent::updateEventContent($content);
 		
 		//Delete Content
-		pv_deleteContent($content_id);
+		//PVContent::deleteContent($content_id);
 		
 		echo '<p>Content Example Finished</p>';
 		?>

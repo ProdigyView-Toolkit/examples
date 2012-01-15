@@ -24,20 +24,20 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<?php
 		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
+		$content_alias=PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias']=$content_alias;
 		//Create Content and Retrieve ID
-		$content_id=pv_createProductContent($args);
+		$content_id=PVContent::createProductContent($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
 		
 		<?php
 		//Search for content based on content_type
-		$search_args=array('content_type'=>'example_content_product');
+		$search_args=array('content_type'=>'example_content_product', 'product_price' => '109.99', 'limit' => 5);
 		//Get the Content List
-		$content_list=pv_getContentProductList($search_args);
+		$content_list=PVContent::getProductContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -55,18 +55,18 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getProductContent($content_id);
+		$content=PVContent::getProductContent($content_id);
 		//Other way for Getting the Content
-		$content=pv_getProductContent(pv_getContentIDByContentAlias($content_alias));
+		$content=PVContent::getProductContent(PVContent::getContentIDByContentAlias($content_alias));
 		//Get the Content Value
 		$content_title=$content['content_title'];
 		
 		//Update the Content with the same values but only changing owner id
-		$content['owner_id']=5;
-		pv_updateProductContent($content);
+		$content['product_color'] = 'Green';
+		PVContent::updateProductContent($content);
 		
 		//Delete Content
-		pv_deleteContent($content_id);
+		PVContent::deleteContent($content_id);
 		
 		echo '<p>Content Example Finsihed</p>';
 		?>

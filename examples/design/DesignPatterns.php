@@ -1,4 +1,8 @@
 <?php
+//Turn on error reporting
+ini_set('display_errors','On');
+error_reporting(E_ALL); 
+
 //Only the class loader is needed because no database connection
 //or supporting libraries are needed
 include_once ('../../DEFINES.php');
@@ -25,15 +29,15 @@ class Restaurant extends PVApplication {
 			return $this -> _callAdapter(get_class(), __FUNCTION__, $details);
 
 		if ($order == 'steak') {
-			$this -> _addToCollectionWithName('steak', 12.99);
+			$this -> addToCollectionWithName('steak', 12.99);
 		} else if ($order == 'eggs') {
-			$this -> _addToCollectionWithName('eggs', 3.99);
+			$this -> addToCollectionWithName('eggs', 3.99);
 		} else if ($order == 'juice') {
-			$this -> _addToCollectionWithName('juice', 1.99);
+			$this -> addToCollectionWithName('juice', 1.99);
 		} else if ($order == 'lobster') {
-			$this -> _addToCollectionWithName('lobster', 19.99);
+			$this -> addToCollectionWithName('lobster', 19.99);
 		} else if ($order == 'wine') {
-			$this -> _addToCollectionWithName('wine', 4.99);
+			$this -> addToCollectionWithName('wine', 4.99);
 		}
 
 		$order = $this -> _applyFilter(get_class(), __FUNCTION__, $order);
@@ -46,7 +50,7 @@ class Restaurant extends PVApplication {
 		if ($this -> _hasAdapter(get_class(), __FUNCTION__))
 			return $this -> _callAdapter(get_class(), __FUNCTION__, $details);
 
-		$orders = $this -> _getIterator();
+		$orders = $this -> getIterator();
 
 		$bill = '';
 		$total = 0;

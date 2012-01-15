@@ -16,9 +16,9 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 			'content_title'=>'A sampleImage', 
 			'content_description'=>'This is my first example content',
 			'file_name'=>'My Sample Image',
-			'tmp_name'=>'example_files/sampe_image_1.jpg',
-			'file_size'=>filesize('example_files/sampe_image_1.jpg'),
-			'file_type'=>'image/jpeg'
+			'tmp_name'=>'example_files/sample_image_1.jpg',
+			'file_size'=>filesize('example_files/sample_image_1.jpg'),
+			'file_type'=>PVFileManager::getFileMimeType('example_files/sample_image_2.jpg')
 		);
 		?>
 		
@@ -26,11 +26,11 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<?php
 		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
+		$content_alias=PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias']=$content_alias;
-		//Create Image Content and Retrieve ID
-		$content_id=pv_createImageContentWithFile($args);
+		//Create image content, move the file and retrieve the ID
+		$content_id = PVContent::createImageContentWithFile($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
@@ -39,7 +39,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		//Search for content based on content_type
 		$search_args=array('content_type'=>'example_content_image');
 		//Get the Content List
-		$content_list=pv_getContentImageList($search_args);
+		$content_list=PVContent::getImageContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -55,7 +55,7 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getImageContent($content_id);
+		$content=PVContent::getImageContent($content_id);
 		
 		//Get the Content Value
 		$content_title=$content['content_title'];
@@ -68,12 +68,15 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		//Display Image
 		echo PVHtml::image($content['image_url'], array('onclick'=>'alert(\'This is pretty cool!\');'));
 		
-		//Update the Content with the same values but only changing owner id
-		$content['owner_id']=5;
-		pv_updateImageContent($content);
+		//Update the image content with a new image
+		$content['file_name']='My Second Sample';
+		$content['tmp_name']='example_files/sample_image_2.jpg';
+		$content['file_size']=filesize('example_files/sample_image_2.jpg');
+		$content['file_type']=PVFileManager::getFileMimeType('example_files/sample_image_2.jpg');
+		PVContent::updateImageContentWithFile($content);
 		
 		//Delete Content
-		pv_deleteContent($content_id);
+		PVContent::deleteContent($content_id);
 		
 		echo '<p>Image Content Example Finished</p>';
 		?>

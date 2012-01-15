@@ -24,11 +24,11 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		
 		<?php
 		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
+		$content_alias = PVContent::createUniqueContentAlias('sample_alias');
 		//Add Alias to To Arguements
 		$args['content_alias']=$content_alias;
 		//Create Content and Retrieve ID
-		$content_id=pv_createTextContent($args);
+		$content_id = PVContent::createTextContent($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
@@ -43,11 +43,11 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 			'text_page_number'=>2
 		);
 		
-		$content_id_2=pv_createTextContent($args);
-		//Search for content based on content_type
-		$search_args=array('content_type'=>'example_content_text', 'order_by'=>'text_page_number');
+		$content_id_2 = PVContent::createTextContent($args);
+		//Search for content based on content_type and order by the page number
+		$search_args = array('content_type'=>'example_content_text', 'order_by'=>'text_page_number');
 		//Get the Content List
-		$content_list=pv_getContentTextList($search_args);
+		$content_list = PVContent::getTextContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -63,19 +63,19 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getTextContent($content_id);
+		$content = PVContent::getTextContent($content_id);
 		//Other way for Getting the Content
-		$content=pv_getTextContent(pv_getContentIDByContentAlias($content_alias));
+		$content = PVContent::getTextContent(PVContent::getContentIDByContentAlias($content_alias));
 		//Get the Content Value
 		$content_title=$content['content_title'];
 		
-		//Update the Content with the same values but only changing owner id
-		$content['text_content']=$content['text_content'].='Ryan leaped in the woods, got the ball and ran home!';
-		pv_updateContent($content);
+		//Update the Content with the same values but append a new line of text
+		$content['text_content'] = $content['text_content'].='Ryan leaped in the woods, got the ball and ran home!';
+		PVContent::updateContent($content);
 		
 		//Delete Content
-		pv_deleteContent($content_id);
-		pv_deleteContent($content_id_2);
+		PVContent::deleteContent($content_id);
+		PVContent::deleteContent($content_id_2);
 		
 		echo '<p>Content Example Finsihed</p>';
 		?>

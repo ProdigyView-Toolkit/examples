@@ -13,35 +13,38 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		//Set Content Variables
 		$args=array(
 			'content_type'=>'example_content_video',  
+			'content_title'=>'A Youtube Video: What She Say', 
+			'content_description'=>'If someone can make sense of this answer, please tell me',
+			'video_src'=>'http://www.youtube.com/watch?v=lj3iNxZ8Dww',
+			'video_allow_embedding' => 1,
+			'video_length' => '0:48'
+		);
+	
+		$content_id = PVContent::createVideoContent($args);
+		
+		//Set Content Variables
+		$args=array(
+			'content_type'=>'example_content_video',  
 			'content_title'=>'A Sample Video', 
 			'content_description'=>'This is my first example of video content',
 			'file_name'=>'Marvel/DC After Hours',
 			'tmp_name'=>'example_files/sample_video.mp4',
 			'file_size'=>filesize('example_files/sample_video.mp4'),
-			'file_type'=>'video/mp4',
+			'file_type'=>PVFileManager::getFileMimeType('example_files/sample_video.mp4'),
 			'convert_to_ogv'=>true,
 			'convert_to_webm'=>true,
 		);
-		?>
 		
-		<p>Content fields that are going to be created:<pre><?php print_r($args); ?></pre></p>
-		
-		<?php
-		//Create a Unique Alias
-		$content_alias=pv_createUniqueContentAlias('sample_alias');
-		//Add Alias to To Arguements
-		$args['content_alias']=$content_alias;
-		//Create Image Content and Retrieve ID
-		$content_id=PVContent::createVideoContentWithFile($args);
+		$content_id = PVContent::createVideoContentWithFile($args);
 		?>
 		
 		<p>Recently created content ID: <?php echo $content_id; ?></p>
 		
 		<?php
-		//Search for content based on content_type
-		$search_args=array('content_type'=>'example_content_video');
+		//Search for content based on content_type and set the order
+		$search_args=array('content_type'=>'example_content_video', 'order_by' => 'video_length');
 		//Get the Content List
-		$content_list=pv_getContentVideoList($search_args);
+		$content_list=PVContent::getVideoContentList($search_args);
 		?>
 		<hr />
 		<p>Search arguments for content:<pre><?php print_r($search_args);?></pre></p>
@@ -54,11 +57,13 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 			echo '<strong>Content ID:</strong> '.$value['content_id'].'<br />';
 			echo '<strong>Content Title:</strong> '.$value['content_title'].'<br />';
 			echo '<strong>Date Created:</strong> '.$value['date_created'].'<br /><br />';
-			echo '<strong>Audio Duration:</strong> '.PVAudioRenderer::getDuration('example_files/sample_audio.mp3').'<br /><br />';
+			echo '<strong>OGV File:</strong> '.$value['ogv_file'].'<br /><br />';
+			echo '<strong>WebM File:</strong> '.$value['webm_file'].'<br /><br />';
+			echo '<strong>MP4 File:</strong> '.$value['mp4_file'].'<br /><br />';
 		}//end foreach
 		
 		//Retrive the Content based upon the ID
-		$content=pv_getVideoContent($content_id);
+		$content=PVContent::getVideoContent($content_id);
 		
 		//Get the Content Value
 		$content_title=$content['content_title'];
@@ -68,15 +73,15 @@ require_once(PV_CORE.'_BootCompleteSystem.php');
 		<p>Display the recently created image</p>
 		
 		<?php
-		//Display Image
+		//Display Video in HTML5 Form
 		echo PVHtml::video('', $content);
 		
-		//Update the Content with the same values but only changing owner id
-		$content['owner_id']=5;
-		pv_updateVideoContent($content);
+		//Update the Content with the same values but only the video length
+		$content['video_length'] = '3:40';
+		PVContent::updateVideoContent($content);
 		
 		//Delete Content
-		//pv_deleteContent($content_id);
+		//PVContent::deleteContent($content_id);
 		
 		echo '<p>VideoContent Example Finished</p>';
 		?>

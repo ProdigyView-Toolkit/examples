@@ -1,20 +1,20 @@
 <?php
-//Include the DEFINES and include only the components. This will allow you to explicity
+//Include the DEFINES and include only the classloader. This will allow you to explicity
 //change the boot configuration to set your to fit your needs. Rememeber to not initialize
 // the database or load the plugins.
 include_once ('../../DEFINES.php');
-require_once (PV_CORE . '_BootCoreComponents.php');
-PVBootstrap::bootSystem(array('initialize_database' => false, 'load_plugins' => false));
+require_once (PV_CORE . '_classLoader.php');
+PVBootstrap::bootSystem(array('initialize_database' => false, 'load_plugins' => false, 'load_database' => false));
 
 //Add a connection, replace with your creditentials.
 $connection = array(
-	'dbhost' => 'localhost', //host
-	'dbname' => 'adbname', //database name
-	'dbuser' => 'adbuser', //user
-	'dbpass' => 'adbpassword', //user's password
-	'dbtype' => 'mysql', //database type
-	'dbschema' => '', //schema(optional)
-	'dbport' => '', //port(optional)
+	'dbhost' => 'localhost', 	//host
+	'dbname' => 'adbname', 		//database name
+	'dbuser' => 'adbuser', 		//user
+	'dbpass' => 'adbpassword', 	//user's password
+	'dbtype' => 'mysql', 		//database type
+	'dbschema' => '', 			//schema(optional)
+	'dbport' => '', 			//port(optional)
 	'dbprefix' => 'pv_'			//table prefix(optional)
 );
 //Add a connection to the database class

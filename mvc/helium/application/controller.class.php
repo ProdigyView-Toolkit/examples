@@ -4,11 +4,19 @@ Abstract Class Controller extends He2Object {
 
 	protected $registry;
 	
-	private $template = array();
+	protected $_template = array();
 	
-	private $layout = array();
+	protected $_layout = array();
 
-	function __construct($registry) {
+	/**
+	 * Instantes that controller object and creates the default layout parameter
+	 * 
+	 * @param registry
+	 * 
+	 * @return void
+	 * @access public
+	 */
+	public function __construct($registry) {
 		$this->registry = $registry;
 		
 		$default_template = array(
@@ -17,7 +25,7 @@ Abstract Class Controller extends He2Object {
 			'disable' => false,
 		);
 		
-		$this->template = $default_template;
+		$this->_template = $default_template;
 		
 		$default_layout = array(
 			'prefix' => 'default',
@@ -26,8 +34,8 @@ Abstract Class Controller extends He2Object {
 			'disable' => false,
 		);
 		
-		$this->template = $default_template;
-		$this->layout = $default_layout;
+		$this->_template = $default_template;
+		$this->_layout = $default_layout;
 	}
 
 	protected function getModel($model_name){
@@ -35,22 +43,38 @@ Abstract Class Controller extends He2Object {
 		return new $model_name($this->registry);
 	}
 	
+	/**
+	 * Returns the information for current template configuration that will be used when display
+	 * the view associated with this model.
+	 * 
+	 * @return array $template The information on the template in an array
+	 * @access public
+	 */
 	public function getTemplate() {
-		return $this->template;
+		return $this->_template;
 	}
 	
+	/**
+	 * Returns the information pertaining to the layout associated with the controller.
+	 * 
+	 * @return array $layout Returns the layout informationin on array
+	 * @access public
+	 */
 	public function getLayout() {
-		return $this->layout;
+		return $this->_layout;
 	}
 	
-	protected function _renderView($args = array()) {
+	/**
+	 * Changes the the view
+	 */
+	protected function _renderView(array $args = array()) {
 		$args += $this -> template;
 		$this -> template = $args;
 	}
 	
-	protected function _renderLayout($args = array()) {
-		$args += $this->layout;
-		$this->layout = $args;
+	protected function _renderLayout(array $args = array()) {
+		$args += $this->_layout;
+		$this->_layout = $args;
 	}
 	
 	abstract function index();

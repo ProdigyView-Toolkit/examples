@@ -19,8 +19,11 @@ echo PVForms::formBegin('myform', array('method' => 'post', 'enctype' => 'multip
 	echo PVForms::label('Name', array('for' => 'name'));
 	echo PVForms::text('name');
 	
-	echo PVForms::label('Click Me', array('for' => 'name'));
-	echo PVForms::button('click_me');
+	echo PVForms::label('Biography', array('for' => 'bio'));
+	echo PVForms::textarea('bio', '');
+	
+	echo PVForms::label('Click Me', array('for' => 'click_me'));
+	echo PVForms::button('click_me',array('style' => 'width: 200px', 'value' => 'Click Me'));
 	
 	echo PVForms::label('Password', array('for' => 'password'));
 	echo PVForms::password('password');
@@ -38,10 +41,10 @@ echo PVForms::formBegin('myform', array('method' => 'post', 'enctype' => 'multip
 	echo PVForms::label('Upload Mug Shot', array('for' => 'mugshot'));
 	echo PVForms::file('mugshot');
 	
-	echo PVForms::label('Send Mugshot to police', array('for' => 'mugshot'));
+	echo PVForms::label('Send Mugshot to police', array('for' => 'send_shot'));
 	echo '<div>';
-	echo PVForms::radio('mugshot', array('value' => 'yes'), array('disable_css' => true)) . 'Yes';
-	echo PVForms::radio('mugshot', array('value' => 'no'), array('disable_css' => true)) . 'No';
+	echo PVForms::radio('send_shot', array('value' => 'yes'), array('disable_css' => true)) . 'Yes';
+	echo PVForms::radio('send_shot', array('value' => 'no'), array('disable_css' => true)) . 'No';
 	echo '</div>';
 	
 	echo '<p>Check to agree to the terms you never actually read</p>';
