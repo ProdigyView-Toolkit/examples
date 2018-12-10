@@ -1,0 +1,5 @@
+.project
+.DS_STORE
+vendor/*
+data/*
+tests/*

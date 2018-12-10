@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 		<!-- Custom styles for this template -->
-		<link href="/html/dashboard.css" rel="stylesheet">
+		<link href="..//html/dashboard.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -24,11 +24,20 @@
 		<div class="container-fluid">
 			<div class="row">
 				<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-					<?php include(__DIR__.'/html/navigation.php'); ?>
+					<?php include('../html/navigation.php'); ?>
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<?= $SERVER["DOCUMENT_ROOT"] ?>
+					<h1>Templating</h1>
+
+					<p>The toolkit provides a basic templating system for outputting and manipulating HTML on websites. Classes and their functionality are below.</p>
+					
+					<ul>
+						<li><a href="Html.php">Forms_Html5.php</a></li>
+						<li><a href="Html.php">Forms.php</a></li>
+						<li><a href="Html.php">Html.php</a></li>
+						<li><a href="Html.php">Html5.php</a></li>
+					</ul>
 				</main>
 			</div>
 		</div>
