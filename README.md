@@ -3,9 +3,9 @@
 Welcome to the ProdigyView Toolkit Examples! These are examples that will show you how to use the tool. It is supplemental to other online resources that include:
 
 1. The Blog: https://medium.com/helium-mvc
-2. Documentation: https://prodigyview.github.io/ProdigyView-Docs/
-3. Well Documented Code: https://github.com/ProdigyView/ProdigyView-Core
-4. MVC Created Using The Toolkit: https://github.com/ProdigyView/Helium
+2. Documentation: https://prodigyview-toolkit.github.io/docs/
+3. Well Documented Code: https://github.com/ProdigyView-Toolkit/prodigyview
+4. MVC Created Using The Toolkit: https://github.com/Helium-MVC/Helium
 
 ### Installing And Running The Examples
 
@@ -18,7 +18,7 @@ If you have not already, please download Docker at https://www.docker.com/. Dock
 After Docker is installed, clone the repo to your computer with git. You can accomplish this by running:
 
 ```bash
-git clone https://github.com/ProdigyView/ProdigyView-Examples /path/on/your/local/
+git clone https://github.com/ProdigyView-Toolkit/examples /path/on/your/local/
 ```
 
 ##### 3. Setup Your Hosts File
