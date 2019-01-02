@@ -33,10 +33,10 @@
 					<p>The toolkit provides a basic templating system for outputting and manipulating HTML on websites. Classes and their functionality are below.</p>
 					
 					<ul>
-						<li><a href="Html.php">Forms_Html5.php</a></li>
-						<li><a href="Html.php">Forms.php</a></li>
-						<li><a href="Html.php">Html.php</a></li>
-						<li><a href="Html.php">Html5.php</a></li>
+						<li><a href="/template/Forms_Html5.php">Forms_Html5.php</a></li>
+						<li><a href="/template/Forms.php">Forms.php</a></li>
+						<li><a href="/template/Html.php">Html.php</a></li>
+						<li><a href="/template/Html5.php">Html5.php</a></li>
 					</ul>
 				</main>
 			</div>

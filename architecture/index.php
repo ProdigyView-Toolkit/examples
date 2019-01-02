@@ -49,7 +49,7 @@
 
 					<ul>
 						<li>
-							<a href="Adapter.php">Adapter.php</a>
+							<a href="/architecture/Adapter.php">Adapter.php</a>
 						</li>
 					</ul>
 
@@ -61,7 +61,7 @@
 
 					<ul>
 						<li>
-							<a href="Collections.php">Collections.php</a>
+							<a href="/architecture/Collections.php">Collections.php</a>
 						</li>
 					</ul>
 
@@ -73,10 +73,10 @@
 
 					<ul>
 						<li>
-							<a href="Command.php">Command.php</a>
+							<a href="/architecture/Command.php">Command.php</a>
 						</li>
 						<li>
-							<a href="StaticCommand.php">StaticCommand.php</a>
+							<a href="/architecture/StaticCommand.php">StaticCommand.php</a>
 						</li>
 					</ul>
 					
@@ -85,7 +85,7 @@
 					<p>Dynamic objects is the ability to append functionality to an object that is not in the classes base functions. Given that the ability to extend an object is accomplished with anonymous functions, is creates the ability to potentially combine Object-Oriented Programming with Functional Programming.</p>
 					<ul>
 						<li>
-							<a href="Objects.php">Objects.php</a>
+							<a href="/architecture/Objects.php">Objects.php</a>
 					</li>
 					</ul>
 					
@@ -95,7 +95,7 @@
 					</p>
 					<ul>
 						<li>
-							<a href="Filters.php">Filters.php</a>
+							<a href="/architecture/Filters.php">Filters.php</a>
 					</li>
 					</ul>
 					
@@ -105,7 +105,7 @@
 					</p>
 					<ul>
 						<li>
-							<a href="Observers.php">Observers.php</a>
+							<a href="/architecture/Observers.php">Observers.php</a>
 						</li>
 					</ul>
 
@@ -115,7 +115,7 @@
 					</p>
 					<ul>
 						<li>
-							<a href="Singleton.php">Singleton.php</a>
+							<a href="/architecture/Singleton.php">Singleton.php</a>
 						</li>
 					</ul>
 

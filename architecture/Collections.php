@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
+use prodigyview\util\Collection;
+use prodigyview\template\Html;
+
 echo Html::h1('Code Example + Output');
 echo Html::p('Code will be at the beginning, with example output below.');
 

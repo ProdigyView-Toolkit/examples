@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
+use prodigyview\design\Application;
+use prodigyview\template\Html;
+
 echo Html::h1('Code Example + Output');
 echo Html::p('Code will be at the beginning, with example output below.');
 
@@ -19,7 +22,7 @@ echo Html::h3('Output From Code');
  * PVApplication extends PVObject which extends PVPatterns so you will
  * have a lot of tools are your disposal.
  */
-class ColorPicker extends PVApplication {
+class ColorPicker extends Application {
 
 	protected function blue() {
 		return '0000ff';

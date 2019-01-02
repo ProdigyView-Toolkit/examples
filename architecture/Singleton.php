@@ -5,6 +5,9 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
+use prodigyview\design\Singleton;
+use prodigyview\template\Html;
+
 echo Html::h1('Code Example + Output');
 echo Html::p('Code will be at the beginning, with example output below.');
 
@@ -14,7 +17,9 @@ highlight_string(file_get_contents(__FILE__));
 
 echo Html::h3('Output From Code');
 
-class Tickets extends  PVObject {
+class Tickets {
+	
+	use Singleton;
 	
 	private $rides = 3;
 	
