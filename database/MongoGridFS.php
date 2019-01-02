@@ -2,9 +2,14 @@
 //Include the DEFINES and include only the classloader. This will allow you to explicity
 //change the boot configuration to set your to fit your needs. Rememeber to not initialize
 // the database or load the plugins.
-include_once ('../../DEFINES.php');
-require_once (PV_CORE . '_classLoader.php');
-PVBootstrap::bootSystem(array('initialize_database' => false, 'load_plugins' => false, 'load_database' => false));
+
+ini_set('display_errors','On');
+error_reporting(E_ALL); 
+
+include_once ('../vendor/autoload.php');
+
+use prodigyview\template\Html;
+use prodigyview\system\Database;
 
 //Add a connection, replace with your creditentials.
 $connection = array(
