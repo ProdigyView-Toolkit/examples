@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -20,7 +20,7 @@ $mail=array(
 	'message'=>'Hello World'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -29,7 +29,7 @@ $mail=array(
 	'sender' => 'susan@example.com'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -40,7 +40,7 @@ $mail=array(
 	'blindcopy' => 'karen@example.com'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 
 $mail=array(
@@ -53,7 +53,7 @@ $mail=array(
 	'reply_to' => 'support@example.com'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -66,7 +66,7 @@ $mail=array(
 	'errors_to' => 'tech@example.com'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -79,7 +79,7 @@ $mail=array(
 	'message_id' => 'XR5-3029@example.com'
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -90,7 +90,7 @@ $mail=array(
 	'text_message' => 'Hello,\n <p>Your bill has been paid, thank you.',
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -100,7 +100,7 @@ $mail=array(
 	'attachment' => '/images/my_image.jpeg',
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);
 
 $mail=array(
 	'receiver'=>'bob@example.com', 
@@ -110,4 +110,4 @@ $mail=array(
 	'attachment' => array('/images/my_image.jpeg', '/images/second_image.jpeg'),
 );
 
-PVMail::sendEmail($mail);
+Mail::sendEmail($mail);

@@ -5,17 +5,17 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Add a connection to the database class
-PVDatabase::addConnection('connection1', array(
+Database::addConnection('connection1', array(
 	'dbhost' => 'mysql',
 	'dbname' => 'prodigyview',
 	'dbuser' => 'prodigyview',
@@ -26,7 +26,7 @@ PVDatabase::addConnection('connection1', array(
 	'dbprefix' => 'pv_1_'
 ));
 
-PVDatabase::addConnection('connection2', array(
+Database::addConnection('connection2', array(
 	'dbhost' => 'postgres',
 	'dbname' => 'prodigyview',
 	'dbuser' => 'prodigyview',
@@ -38,67 +38,67 @@ PVDatabase::addConnection('connection2', array(
 ));
 
 //Set Connection to Mysql
-PVDatabase::setDatabase('connection1');
+Database::setDatabase('connection1');
 
 //Get the random operator that is specific to the database being used
-$random = PVDatabase::getSQLRandomOperator();
+$random = Database::getSQLRandomOperator();
 $query = 'SELECT * FROM TABLE_A ORDER BY '.$random;
 echo $query;
 echo '<br />';
 
 //Get the average from a select statement
-$avg = PVDatabase::dbAverageFunction('id');
+$avg = Database::dbAverageFunction('id');
 $query = 'SELECT '.$avg.' FROM TABLE_A GROUP BY age';
 echo $query;
 echo '<br />';
 
 //Retrieve the current database type that is connection
-$type = PVDatabase::getDatabaseType();
+$type = Database::getDatabaseType();
 echo $type;
 echo '<br />';
 
 //Retrieve the current schema, if any. Schemas are commonly used with postgresql and db2
-$schema = PVDatabase::getSchema();
+$schema = Database::getSchema();
 echo $schema;
 echo '<br />';
 
 $table = 'temptable';
-$table_formated = PVDatabase::formatTableName($table);
+$table_formated = Database::formatTableName($table);
 echo $table_formated;
 echo '<br /><br /><br />';
 
 //Change to the PostgreSQL Database
-PVDatabase::setDatabase('connection2');
+Database::setDatabase('connection2');
 
 //Get the random operator that is specific to the database being used
-$random = PVDatabase::getSQLRandomOperator();
+$random = Database::getSQLRandomOperator();
 $query = 'SELECT * FROM TABLE_A ORDER BY '.$random;
 echo $query;
 echo '<br />';
 
 //Get the average from a select statement
-$avg = PVDatabase::dbAverageFunction('id');
+$avg = Database::dbAverageFunction('id');
 $query = 'SELECT '.$avg.' FROM TABLE_A GROUP BY age';
 echo $query;
 echo '<br />';
 
 //Retrieve the current database type that is connection
-$type = PVDatabase::getDatabaseType();
+$type = Database::getDatabaseType();
 echo $type;
 echo '<br />';
 
 //Retrieve the current schema, if any. Schemas are commonly used with postgresql and db2
-$schema = PVDatabase::getSchema();
+$schema = Database::getSchema();
 echo $schema;
 echo '<br />';
 
 $table = 'temptable';
-$table_formated = PVDatabase::formatTableName($table);
+$table_formated = Database::formatTableName($table);
 echo $table_formated;
 echo '<br />';
 
 /**
  * Requries a live connection and a real table. Pagination offset can performaned using this function below.
  * 
- * PVDatabase::getPagininationOffset($table, $join_clause = '', $where_clause = '', $current_page = 0, $results_per_page = 20, $order_by = '')
+ * Database::getPagininationOffset($table, $join_clause = '', $where_clause = '', $current_page = 0, $results_per_page = 20, $order_by = '')
  */

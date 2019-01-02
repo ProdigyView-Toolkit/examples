@@ -6,14 +6,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Create a production and development database connection
 $database_production = array(
@@ -39,15 +39,15 @@ $database_development = array(
 );
 
 //Add the connections and assign them an environemnt
-PVConfiguration::addConfiguration('database', $database_production, array('environment' => 'production'));
+Configuration::addConfiguration('database', $database_production, array('environment' => 'production'));
 
-PVConfiguration::addConfiguration('database', $database_development , array('environment' => 'development'));
+Configuration::addConfiguration('database', $database_development , array('environment' => 'development'));
 
 //Retrieve the configuration based on the enviroment
-$db_config = PVConfiguration::getConfiguration('database', array('environment' => 'production'));
+$db_config = Configuration::getConfiguration('database', array('environment' => 'production'));
 print_r($db_config).'<br />';
 
-$db_config = PVConfiguration::getConfiguration('database', array('environment' => 'development'));
+$db_config = Configuration::getConfiguration('database', array('environment' => 'development'));
 print_r($db_config).'<br />';
 
 
@@ -58,9 +58,9 @@ else
 	$environment = 'development';
 
 //Set the Environment based on the information retrieved from the server variable
-PVConfiguration::init(array('environment' => $environment));
+Configuration::init(array('environment' => $environment));
 
 //Will retrieve the the data based on the environemnt set in the init
-$db_config = PVConfiguration::getConfiguration('database');
+$db_config = Configuration::getConfiguration('database');
 print_r($db_config).'<br />';
 

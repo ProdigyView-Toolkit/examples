@@ -14,8 +14,8 @@ $columns = array(
 //Set the table name
 $table_name = 'ssn_user';
 //Create the table if it does not exist
-if(!PVDatabase::tableExist($table_name)) {
-	$executed_query = PVDatabase::createTable($table_name, $columns, array('primary_key' => 'id'));
+if(!Database::tableExist($table_name)) {
+	$executed_query = Database::createTable($table_name, $columns, array('primary_key' => 'id'));
 }
 
 //Set the arguements for initialize the security class
@@ -30,17 +30,17 @@ $security_config = array(
 	'auth_table' => $table_name
 );
 //Initiliaze the security class
-PVSecurity::init($security_config);
+Security::init($security_config);
 
 //Set the user data
 $data = array(
 	'email' => 'joe@example.com',				//user email
-	'ssn' => PVSecurity::encrypt('111222333'),	//encrypt the ssn
-	'password' => PVSecurity::hash('abc123')	//hash the password
+	'ssn' => Security::encrypt('111222333'),	//encrypt the ssn
+	'password' => Security::hash('abc123')	//hash the password
 );
 
 //Insert user and data into the table in the database
-PVDatabase::insertStatement($table_name, $data);
+Database::insertStatement($table_name, $data);
 
 //Fields that will be used to authenticate user
 $fields = array(
@@ -50,12 +50,12 @@ $fields = array(
 );
 
 //Authenticate user on fields
-if(PVSecurity::checkAuth($fields)){
-	echo PVHtml::p('Authentification Successful');
+if(Security::checkAuth($fields)){
+	echo Html::p('Authentification Successful');
 	print_r($_COOKIE);
 	print_r($_SESSION);
 } else {
-	echo PVHtml::p('Authentificaiton Failed');
+	echo Html::p('Authentificaiton Failed');
 }
 
 //Create a custom salt based on the first two numbers of thess
@@ -63,11 +63,11 @@ $custom_salt = substr('444555666', 0, 2);
 
 $data = array(
 	'email' => 'jane@example.com',							//Set the user email	
-	'ssn' => PVSecurity::encrypt('444555666'),				//Encrypt the ssn
-	'password' => PVSecurity::hash('abc123', $custom_salt)	//Hash with custom salt
+	'ssn' => Security::encrypt('444555666'),				//Encrypt the ssn
+	'password' => Security::hash('abc123', $custom_salt)	//Hash with custom salt
 );
 //Insert data into the table in the database
-PVDatabase::insertStatement($table_name, $data);
+Database::insertStatement($table_name, $data);
 
 //Authenticate users based on the following fields
 $fields = array(
@@ -82,11 +82,11 @@ $options = array(
 );
 
 //Authenticate user on fields with options
-if(PVSecurity::checkAuth($fields, $options)){
-	echo PVHtml::p('Authentification Successful');
+if(Security::checkAuth($fields, $options)){
+	echo Html::p('Authentification Successful');
 	print_r($_COOKIE);
 	print_r($_SESSION);
 } else {
-	echo PVHtml::p('Authentificaiton Failed');
+	echo Html::p('Authentificaiton Failed');
 }
 

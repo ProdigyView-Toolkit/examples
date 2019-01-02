@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 $defaults = array(
 	'cache_location' => PV_ROOT . DS . 'tmp' . DS, 						//Default location to store the cache
@@ -24,4 +24,4 @@ $defaults = array(
 	'memcache_servers' => array()										//Memcache servers to connect too
 );
 
-PVCache::init($defaults);
+Cache::init($defaults);

@@ -5,87 +5,87 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
-//Initialize PVCache
-PVCache::init();
+//Initialize Cache
+Cache::init();
 
 //Uses the default caching set
-PVCache::writeCache('c0', '<p>Saving for later!</p>');
+Cache::writeCache('c0', '<p>Saving for later!</p>');
 
 //Cache is set for 1 minute, after writing comment out and wait 1 minute to expire
-PVCache::writeCache('c1', '<p>Some stuff I want to cache for later</p>', array('cache_expire' => 60));
+Cache::writeCache('c1', '<p>Some stuff I want to cache for later</p>', array('cache_expire' => 60));
 
 //Cache is set for 2 minutes, after writing comment out and wait 2 minutes to expire
-PVCache::writeCache('c2', '<p>More content I want to cache for latter</p>', array('cache_name' => 'pv_cache:', 'cache_expire' => 120));
+Cache::writeCache('c2', '<p>More content I want to cache for latter</p>', array('cache_name' => 'pv_cache:', 'cache_expire' => 120));
 
-$content = PVCache::readCache('c1');
+$content = Cache::readCache('c1');
 echo $content;
 
-$content = PVCache::readCache('c2');
+$content = Cache::readCache('c2');
 echo $content;
 
-$content = PVCache::readCache('c1', array('remove_cache_tag' => false));
+$content = Cache::readCache('c1', array('remove_cache_tag' => false));
 echo $content;
 
-$content = PVCache::readCache('c2', array('cache_name' => 'pv_cache:', 'remove_cache_tag' => false));
+$content = Cache::readCache('c2', array('cache_name' => 'pv_cache:', 'remove_cache_tag' => false));
 echo $content;
 
-$has_expired = PVCache::hasExpired('c1');
+$has_expired = Cache::hasExpired('c1');
 
 if ($has_expired)
 	echo '<p>Content has expiered</p>';
 else
 	echo '<p>Content is not expired</p>';
 
-$has_expired = PVCache::hasExpired('c2', array('cache_name' => 'pv_cache:'));
+$has_expired = Cache::hasExpired('c2', array('cache_name' => 'pv_cache:'));
 
 if ($has_expired)
 	echo '<p>Content has expiered</p>';
 else
 	echo '<p>Content is not expired</p>';
 
-$expiration = PVCache::getExpiration('c0');
+$expiration = Cache::getExpiration('c0');
 echo $expiration . '<br />';
 
-$expiration = PVCache::getExpiration('c1');
+$expiration = Cache::getExpiration('c1');
 echo $expiration . '<br />';
 
-$expiration = PVCache::getExpiration('c2', array('cache_name' => 'pv_cache:'));
+$expiration = Cache::getExpiration('c2', array('cache_name' => 'pv_cache:'));
 echo $expiration . '<br />';
 
-PVCache::deleteCache('c1');
-$content = PVCache::readCache('c1');
+Cache::deleteCache('c1');
+$content = Cache::readCache('c1');
 echo $content;
 
-PVCache::deleteCache('c2');
-$content = PVCache::readCache('c2');
+Cache::deleteCache('c2');
+$content = Cache::readCache('c2');
 echo $content;
 
 //Caching of objects and arrays is also possbile
-PVCache::writeCache('c3', array('apple', 'strawberry', 'grape'));
-$content = PVCache::readCache('c3');
+Cache::writeCache('c3', array('apple', 'strawberry', 'grape'));
+$content = Cache::readCache('c3');
 print_r($content);
-PVCache::deleteCache('c3');
+Cache::deleteCache('c3');
 
 /**
  * An example of how cache can be  used
  */
 function getContent($name) {
 	
-	if(!PVCache::hasExpired($name)) {
-		return PVCache::readCache($name);
+	if(!Cache::hasExpired($name)) {
+		return Cache::readCache($name);
 	} else {
-		$result = PVDatabase::query('SELECT content FROM TABLE_A WHERE ID='.PVDatabase::makeSafe($name));
-		$row = PVDatabase::fetchArray($result);
-		PVCache::writeCache($name, $row['content']);
+		$result = Database::query('SELECT content FROM TABLE_A WHERE ID='.Database::makeSafe($name));
+		$row = Database::fetchArray($result);
+		Cache::writeCache($name, $row['content']);
 		return $row['content'];
 	}
 	

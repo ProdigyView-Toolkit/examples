@@ -6,14 +6,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 /**
  * Create columns to add to a table.]
@@ -34,8 +34,8 @@ $executed_query ='';
 //Set the table name
 $table_name = 'messenger';
 
-if(PVDatabase::getDatabaseType() != 'mongo' && !PVDatabase::tableExist($table_name)) {
-	$executed_query = PVDatabase::createTable($table_name, $columns, array('primary_key' => 'id, handle'));
+if(Database::getDatabaseType() != 'mongo' && !Database::tableExist($table_name)) {
+	$executed_query = Database::createTable($table_name, $columns, array('primary_key' => 'id, handle'));
 }
 
 $insert = array(
@@ -44,7 +44,7 @@ $insert = array(
 	'has_read' => false
 );
 
-PVDatabase::insertStatement($table_name, $insert);
+Database::insertStatement($table_name, $insert);
 echo '<br />';
 
 $select = array(
@@ -56,7 +56,7 @@ $select = array(
 	'table' => $table_name
 );
 
-PVDatabase::selectStatement($select);
+Database::selectStatement($select);
 echo '<br />';
 
 $update_feilds = array(
@@ -66,4 +66,4 @@ $update_feilds = array(
 $update_where = array(
 	'has_read' => '1'
 );
-PVDatabase::updateStatement($table_name, $update_feilds, $update_where );
+Database::updateStatement($table_name, $update_feilds, $update_where );

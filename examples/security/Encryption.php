@@ -9,26 +9,26 @@ date_default_timezone_set('UTC');
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_classLoader.php');
 
-PVSecurity::init();
+Security::init();
 
 $string = 'I saw Susie sitting in a shoe shine shop.
 Where she sits she shines, and where she shines she sits.';
 
 echo $string.'<br />';
 
-$encrypted_string = PVSecurity::encrypt($string);
+$encrypted_string = Security::encrypt($string);
 echo $encrypted_string.'<br />';
 
-$decrypted_string = PVSecurity::decrypt($encrypted_string);
+$decrypted_string = Security::decrypt($encrypted_string);
 echo $decrypted_string.'<br />';
 
-$encrypted_string = PVSecurity::encrypt($string, array('mcrypt_key' => 'Lamba1RSF'));
+$encrypted_string = Security::encrypt($string, array('mcrypt_key' => 'Lamba1RSF'));
 echo $encrypted_string.'<br />';
 
-$decrypted_string = PVSecurity::decrypt($encrypted_string);
+$decrypted_string = Security::decrypt($encrypted_string);
 echo $decrypted_string.'<br />';
 
-$decrypted_string = PVSecurity::decrypt($encrypted_string, array('mcrypt_key' => 'Lamba1RSF'));
+$decrypted_string = Security::decrypt($encrypted_string, array('mcrypt_key' => 'Lamba1RSF'));
 echo $decrypted_string.'<br />';
 
 

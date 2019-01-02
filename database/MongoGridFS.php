@@ -19,10 +19,10 @@ $connection = array(
 );
 
 //Add a connection to the database class
-PVDatabase::addConnection('mongo_connection', $connection);
+Database::addConnection('mongo_connection', $connection);
 
 //Connect to the database using a connection
-PVDatabase::setDatabase('mongo_connection');
+Database::setDatabase('mongo_connection');
 
 //Set the table name
 $table_name = 'images';
@@ -35,7 +35,7 @@ $image_location_2 = PV_ROOT . '/examples/content/example_files/sample_image_2.jp
 //Data is inserted into Mongo in an array format
 $insert = array(
 	'name' => 'Sample Image',
-	'mime_type' => PVFileManager::getFileMimeType($image_location),
+	'mime_type' => FileManager::getFileMimeType($image_location),
 	'file_size' => filesize($image_location)
 );
 
@@ -46,13 +46,13 @@ $options = array(
 );
 
 //Insert data into gridFS and return MongoID
-$id = PVDatabase::insertStatement($table_name, $insert, $options);
-echo PVHtml::p('Return ID 1: ' . $id);
+$id = Database::insertStatement($table_name, $insert, $options);
+echo Html::p('Return ID 1: ' . $id);
 
 //Data is inserted into Mongo in an array format
 $insert = array(
 	'name' => 'Sample Image 2',
-	'mime_type' => PVFileManager::getFileMimeType($image_location_2),
+	'mime_type' => FileManager::getFileMimeType($image_location_2),
 	'file_size' => filesize($image_location_2)
 );
 
@@ -63,18 +63,18 @@ $options = array(
 );
 
 //Insert the data into the GridFS
-$id_2 = PVDatabase::insertStatement($table_name, $insert, $options);
-echo PVHtml::p( 'Return ID 2: '. $id_2);
+$id_2 = Database::insertStatement($table_name, $insert, $options);
+echo Html::p( 'Return ID 2: '. $id_2);
 
 //Set the options for finding multiple value passed on passed parameters
 $select = array(
-	'where' => array('mime_type' => PVFileManager::getFileMimeType($image_location_2)),
+	'where' => array('mime_type' => FileManager::getFileMimeType($image_location_2)),
 	'table' => $table_name
 );
 
-$result = PVDatabase::selectStatement($select, array('gridFS' => true));
+$result = Database::selectStatement($select, array('gridFS' => true));
 
-echo PVHtml::h1('Files found in the GridFS');
+echo Html::h1('Files found in the GridFS');
 foreach($result as $key => $value) {
 	print_r($value);
 }
@@ -85,17 +85,17 @@ $select = array(
 	'table' => $table_name
 );
 
-$result = PVDatabase::selectStatement($select, array('gridFS' => true, 'findOne' => true));
+$result = Database::selectStatement($select, array('gridFS' => true, 'findOne' => true));
 
-echo PVHtml::h1('Returned Single File');
+echo Html::h1('Returned Single File');
 print_r($result);
 echo '<br />';
 
 //Write the image to a file and display
 //Another method would be writing the bytes under a header tag
 $image_bytes = $result -> getBytes();
-PVFileManager::writeFile(PV_ROOT.PV_IMAGE.'gridfsimage.jpeg', $image_bytes);
-echo PVHtml::image('gridfsimage.jpeg');
+FileManager::writeFile(PV_ROOT.PV_IMAGE.'gridfsimage.jpeg', $image_bytes);
+echo Html::image('gridfsimage.jpeg');
 
 $update_feilds = array(
 	'name' => 'Sample Image 3'
@@ -105,6 +105,6 @@ $update_where = array(
 	'name' => 'Sample Image'
 	
 );
-PVDatabase::updateStatement($table_name, $update_feilds, $update_where, array('gridFS' => true) );
+Database::updateStatement($table_name, $update_feilds, $update_where, array('gridFS' => true) );
 
-$result = PVDatabase::deleteStatement($select, array('gridFS' => true));
+$result = Database::deleteStatement($select, array('gridFS' => true));

@@ -5,18 +5,18 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Create A connection to postgresql
 //Uses the connection in the docker config
-PVDatabase::addConnection('connection', array(
+Database::addConnection('connection', array(
 	'dbhost' => 'postgres', 	//host
 	'dbname' => 'prodigyview', 		//database name
 	'dbuser' => 'prodigyview', 		//user
@@ -28,7 +28,7 @@ PVDatabase::addConnection('connection', array(
 ));
 
 //Connect to the database using a connection
-PVDatabase::setDatabase('connection');
+Database::setDatabase('connection');
 
 //Set up the information for creating a table.
 $options = array('primary_key' => 'record_id');
@@ -46,8 +46,8 @@ $columns = array(
 $table = 'sessions';
 
 //Create table if it does not
-if (!PVDatabase::tableExist($table)) {
-	PVDatabase::createTable($table, $columns, $options);
+if (!Database::tableExist($table)) {
+	Database::createTable($table, $columns, $options);
 }
 
 ?>
@@ -67,22 +67,22 @@ if (!PVDatabase::tableExist($table)) {
 		<p>
 			Creating a prepared statement.
 		</p>
-		<?php $id = PVDatabase::preparedReturnLastInsert($table, 'record_id', $table, $data); ?>
+		<?php $id = Database::preparedReturnLastInsert($table, 'record_id', $table, $data); ?>
 		<p>
 			Result of prepared statement <?php echo $id; ?>
 		</p>
 		<h2>Prepared Select</h2>
-		<?php $query = 'SELECT * FROM ' . $table . ' WHERE user_id=' . PVDatabase::getPreparedPlaceHolder(1);
+		<?php $query = 'SELECT * FROM ' . $table . ' WHERE user_id=' . Database::getPreparedPlaceHolder(1);
 		$data = array('user_id' => 3);
-		$result = PVDatabase::preparedSelect($query, $data);
+		$result = Database::preparedSelect($query, $data);
 		?>
 		<p>
-			Row Count: <?php echo PVDatabase::resultRowCount($result); ?>
+			Row Count: <?php echo Database::resultRowCount($result); ?>
 		</p>
 		<p>
 			Return a row
 		</p>
-		<?php $row = PVDatabase::fetchArray($result); ?>
+		<?php $row = Database::fetchArray($result); ?>
 		<pre><?php print_r($row); ?></pre>
 		?> <h2>Update the Row</h2>
 		<?php $data = array(
@@ -93,13 +93,13 @@ if (!PVDatabase::tableExist($table)) {
 		?>
 		<pre><?php echo print_r($data); ?></pre>
 		<pre><?php echo print_r($wherelist); ?></pre>
-		<?php PVDatabase::preparedUpdate($table, $data, $wherelist); ?>
+		<?php Database::preparedUpdate($table, $data, $wherelist); ?>
 		<p>
 			Row has be succesffuly update
 		</p>
 		<h2>Delete Row</h2>
 		<?php
-		PVDatabase::preparedDelete($table, $wherelist);
+		Database::preparedDelete($table, $wherelist);
 		?>
 		<p>
 			Row has been succesfully deleted.

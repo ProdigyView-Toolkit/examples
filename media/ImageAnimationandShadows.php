@@ -8,19 +8,19 @@ error_reporting(E_ALL);
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_classLoader.php');
 
-PVImage::init();
+Image::init();
 
 //Create an array to hold multople image
 $images = array();
 //Create images of a circle base on degreees
 for($i = 1; $i < 11; $i++ ){
-	$images[] = PVImage::drawEllipse(100 , 100, 'yellow',  array('end_angle' =>$i * 36));
+	$images[] = Image::drawEllipse(100 , 100, 'yellow',  array('end_angle' =>$i * 36));
 }
 
 //Animate the array of iamges
-$image_1 = PVImage::animateImage($images);
+$image_1 = Image::animateImage($images);
 $image_1 = str_replace(PV_ROOT, '' , $image_1);
-echo PVHtml::image($image_1, array('append_location' => false)).'<br /><br /><br />';
+echo Html::image($image_1, array('append_location' => false)).'<br /><br /><br />';
 
 //Create an array with different strings of texts
 $text_array = array(
@@ -39,18 +39,18 @@ $options = array(
 );
 
 //Create an animated gif with the text and options
-$image_2 = PVImage::animateText($text_array, $options);
+$image_2 = Image::animateText($text_array, $options);
 //Dispay the gif as an image
 $image_2 = str_replace(PV_ROOT, '' , $image_2);
-echo PVHtml::image($image_2, array('append_location' => false)).'<br /><br />';
+echo Html::image($image_2, array('append_location' => false)).'<br /><br />';
 
 //Set the location of the image to alter
 $image_location = PV_ROOT . '/examples/content/example_files/sample_image_1.jpg';
 
 //Create and display a drop shadow of the image
-$image_3 = PVImage::drawDropShadow($image_location); 
+$image_3 = Image::drawDropShadow($image_location); 
 $image_3 = str_replace(PV_ROOT, '' , $image_3);
-echo PVHtml::image($image_3, array('append_location' => false)).'<br />';
+echo Html::image($image_3, array('append_location' => false)).'<br />';
 
 //Set some options of the dropshadow
 $options = array(
@@ -59,7 +59,7 @@ $options = array(
 );
 
 //Create an display the drop shadow with options
-$image_4 = PVImage::drawDropShadow($image_location, $options); 
+$image_4 = Image::drawDropShadow($image_location, $options); 
 $image_4 = str_replace(PV_ROOT, '' , $image_4);
-echo PVHtml::image($image_4, array('append_location' => false)).'<br />';
+echo Html::image($image_4, array('append_location' => false)).'<br />';
 

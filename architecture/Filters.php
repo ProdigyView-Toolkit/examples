@@ -5,21 +5,27 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+use prodigyview\design\Filter;
+use prodigyview\design\StatiFilter;
+use prodigyview\template\Html;
 
-echo PVHtml::h3('Code Example');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
+
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 /**
  * Class VendingMachine extends PVObject to gain all its features
  * and PVPatterns which has the filters.
  */
-class VendingMachine extends PVObject {
+class VendingMachine {
 
+	use Filter;
+	
 	public function vend($option, $money, $age) {
 
 		if ($option == 1)

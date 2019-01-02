@@ -39,8 +39,8 @@ Run::addFilter('Run', 'goForARun', 'run_filter', $arguements_filter, array('type
 //This time add the anonymous function directly in the filter and set it for a different event
 Run::addFilter('Run', 'goForARun', 'run_filter', function($data, $options) {
 	
-	$data = PVHtml::strong($data);
-	$data = PVHtml::p($data);
+	$data = Html::strong($data);
+	$data = Html::p($data);
 	
 	return $data;
 	
@@ -48,14 +48,14 @@ Run::addFilter('Run', 'goForARun', 'run_filter', function($data, $options) {
 
 //Add an observer with an anonymous function
 Run::addObserver('Run::goForARun', 'run_observer', function($miles, $return){
-	echo PVHtml::div('Running '. $miles. ' has caused you to lose 2 pounds', array('style' => 'margin-top:10px;'));
+	echo Html::div('Running '. $miles. ' has caused you to lose 2 pounds', array('style' => 'margin-top:10px;'));
 }, array('type' => 'closure'));
 
 echo Run::goForARun(5);
 
 //Add an adapter as an anonymous function. Remember to set the type to closure
 Run::addAdapter('Run','goForARun', function($miles){
-	echo PVHtml::p('Because of the weather, you were not able to run '.$miles. ' today');
+	echo Html::p('Because of the weather, you were not able to run '.$miles. ' today');
 }, array('type' => 'closure'));
 
 echo Run::goForARun(8);

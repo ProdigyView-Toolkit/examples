@@ -2,7 +2,7 @@
 	/**
 	 * The file should only contain the database configuration. Please not that you can
 	 * define multiple database connections each and they will be loaded automatically
-	 * at run time. Connections can also be added manually by using the PVDatabase::add()
+	 * at run time. Connections can also be added manually by using the Database::add()
 	 * function.
 	 * 
 	 * dbhost - The host or ip the database is on

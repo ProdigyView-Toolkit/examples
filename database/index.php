@@ -37,10 +37,10 @@
 					<p>In this first file, we are going to start with Mysql and review the basics of SQL by:</p>
 
 					<ol>
-						<li>Connecting To A database with PVDatabase::addConnection, PVDatabase::setDatabase.</li>
-						<li>Create a database with  columns using PVDatabase::tableExist and PVDatabase::createTable</li>
-						<li>Sanitizing input with PVDatabase::makeSafe</li>
-						<li>And finally inserting and querying data with PVDatabase::query</li>
+						<li>Connecting To A database with Database::addConnection, Database::setDatabase.</li>
+						<li>Create a database with  columns using Database::tableExist and Database::createTable</li>
+						<li>Sanitizing input with Database::makeSafe</li>
+						<li>And finally inserting and querying data with Database::query</li>
 					</ol>
 
 					<ul>

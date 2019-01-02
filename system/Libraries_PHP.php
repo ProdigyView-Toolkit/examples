@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //The first round of flipswitch should not run any functions because the library has
 //yet to be loaded
@@ -22,17 +22,17 @@ flipSwitch();
 //Initialize the library, add the library that is currently in the PV_LIBRARIES
 //define location but only allow calles to be included with the extension
 //.class.php. The first arguement is the folder name.
-PVLibraries::init();
-PVLibraries::addLibrary('pv_switch', array('extensions' => array('.class.php')));
-PVLibraries::loadLibraries();
+Libraries::init();
+Libraries::addLibrary('pv_switch', array('extensions' => array('.class.php')));
+Libraries::loadLibraries();
 
 echo '<h1>Test 2</h1>';
 flipSwitch();
 
 //Add the same library except leave the extension blank to allow every
 //extension with .php to load
-PVLibraries::addLibrary('pv_switch');
-PVLibraries::loadLibrary('pv_switch');
+Libraries::addLibrary('pv_switch');
+Libraries::loadLibrary('pv_switch');
 
 echo '<h1>Test 3</h1>';
 flipSwitch();

@@ -5,74 +5,74 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
-//PVValidator has a lot of validation checks
+//Validator has a lot of validation checks
 //The ones in this example are only a select few of the many
 
-$valid = PVValidator::isInteger(3);
+$valid = Validator::isInteger(3);
 echo ($valid) ? '<p>Value is an integer</p>' : '<p>Value is not an integer</p>';
 
-$valid = PVValidator::isInteger('r');
+$valid = Validator::isInteger('r');
 echo ($valid) ? '<p>Value is an integer</p>' : '<p>Value is not an integer</p>';
 
 
-$valid = PVValidator::isDouble(3.2);
+$valid = Validator::isDouble(3.2);
 echo ($valid) ? '<p>Value is a double</p>' : '<p>Value is not a double</p>';
 
-$valid = PVValidator::isDouble(5);
+$valid = Validator::isDouble(5);
 echo ($valid) ? '<p>Value is a double</p>' : '<p>Value is not a double</p>';
 
 
-$valid = PVValidator::isValidEmail('example@aol.com');
+$valid = Validator::isValidEmail('example@aol.com');
 echo ($valid) ? '<p>Value is a valid email</p>' : '<p>Value is not a valid email</p>';
 
-$valid = PVValidator::isValidEmail('someone@');
+$valid = Validator::isValidEmail('someone@');
 echo ($valid) ? '<p>Value is a valid email</p>' : '<p>Value is not a valid email</p>';
 
 
 
-$valid = PVValidator::isAudioFile('audio/mpeg');
+$valid = Validator::isAudioFile('audio/mpeg');
 echo ($valid) ? '<p>Value is an audio mime type</p>' : '<p>Value is not an audio mime type</p>';
 
-$valid = PVValidator::isAudioFile('text');
+$valid = Validator::isAudioFile('text');
 echo ($valid) ? '<p>Value is an audio mime type</p>' : '<p>Value is not an audio mime type</p>';
 
 
 
-$valid = PVValidator::isImageFile('image/gif');
+$valid = Validator::isImageFile('image/gif');
 echo ($valid) ? '<p>Value is an image mime type</p>' : '<p>Value is not an image mime type</p>';
 
-$valid = PVValidator::isImageFile('audio/mpeg');
+$valid = Validator::isImageFile('audio/mpeg');
 echo ($valid) ? '<p>Value is an image mime type</p>' : '<p>Value is not an image mime type</p>';
 
 
 
-$valid = PVValidator::isVideoFile('video/webm');
+$valid = Validator::isVideoFile('video/webm');
 echo ($valid) ? '<p>Value is an video mime type</p>' : '<p>Value is not an video mime type</p>';
 
-$valid = PVValidator::isVideoFile('audio/x-wav');
+$valid = Validator::isVideoFile('audio/x-wav');
 echo ($valid) ? '<p>Value is an video mime type</p>' : '<p>Value is not an video mime type</p>';
 
 
 
-$valid = PVValidator::isCompressedFile('application/zip');
+$valid = Validator::isCompressedFile('application/zip');
 echo ($valid) ? '<p>Value is an compressed file mime type</p>' : '<p>Value is not an compressed file mime type</p>';
 
-$valid = PVValidator::isCompressedFile('video/ogv');
+$valid = Validator::isCompressedFile('video/ogv');
 echo ($valid) ? '<p>Value is an compressed file mime type</p>' : '<p>Value is not an compressed file mime type</p>';
 
 
 
-$valid = PVValidator::isMicrosoftWordDocFile('application/vnd.ms-excel');
+$valid = Validator::isMicrosoftWordDocFile('application/vnd.ms-excel');
 echo ($valid) ? '<p>Value is an MS Word mime type</p>' : '<p>Value is not an MS Word mime type</p>';
 
-$valid = PVValidator::isMicrosoftWordDocFile('application/x-zip');
+$valid = Validator::isMicrosoftWordDocFile('application/x-zip');
 echo ($valid) ? '<p>Value is an MS Word mime type</p>' : '<p>Value is not an MS Word mime type</p>';

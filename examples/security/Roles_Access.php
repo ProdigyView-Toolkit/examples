@@ -31,30 +31,30 @@ $user_info=PVUsers::getUserInfo('roleexample@example.com');
 
 //Check the user's access level
 for($i=0; $i<5;$i++) {
-	$access=(PVSecurity::checkUserAccessLevel($user_info['user_id'], $i)) ? 
+	$access=(Security::checkUserAccessLevel($user_info['user_id'], $i)) ? 
 	'Has the required access level with level '.$i : 'Does not have the required acccess level with access level '.$i;
 	echo '<p>'.$access.'</p>';
 }
 
-$has_roles=(PVSecurity::checkUserRole($user_info['user_id'], 'Administrator')) ? 
+$has_roles=(Security::checkUserRole($user_info['user_id'], 'Administrator')) ? 
 'User has correct role for access.' : 'User does not have the required role for access';
 echo $has_roles.'<br />';
 
-$has_roles=(PVSecurity::checkUserRole($user_info['user_id'], 'Super Administrator')) 
+$has_roles=(Security::checkUserRole($user_info['user_id'], 'Super Administrator')) 
 ? 'User has correct role for access.' : 'User does not have the required role for access';
 echo $has_roles.'<br />';
 
-$has_roles=(PVSecurity::checkUserRole($user_info['user_id'], array('Super Administrator','Administrator'))) 
+$has_roles=(Security::checkUserRole($user_info['user_id'], array('Super Administrator','Administrator'))) 
 ? 'User has correct role for access.' : 'User does not have the required role for access';
 echo $has_roles.'<br />';
 
-$has_roles=(PVSecurity::checkUserRole($user_info['user_id'], array('Registered','Not Registered'))) 
+$has_roles=(Security::checkUserRole($user_info['user_id'], array('Registered','Not Registered'))) 
 ? 'User has correct role for access.' : 'User does not have the required role for access';
 echo $has_roles.'<br />';
 
 //Add a role to that user and recheck
 PVUsers::addUserToRole($user_info['user_id'], 'Super Administrator');
-$has_roles=(PVSecurity::checkUserRole($user_info['user_id'], 'Super Administrator')) 
+$has_roles=(Security::checkUserRole($user_info['user_id'], 'Super Administrator')) 
 ? 'User has correct role for access.' : 'User does not have the required role for access';
 echo $has_roles.'<br />';
 

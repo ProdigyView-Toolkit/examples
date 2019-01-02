@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 $config = array(
 	'default_sender' => 'jane@example.com',
@@ -23,4 +23,4 @@ $config = array(
 	'smtp_port' => 587,		
 );
 
-PVMail::init($config);
+Mail::init($config);

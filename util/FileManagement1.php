@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 /**
  * Examples of the basics for writing and reading files as well
@@ -30,55 +30,55 @@ $file = $draft_directory . 'MyBook.txt';
 $file2 = $draft_directory . 'MySequel.txt';
 
 //Write a new file
-PVFileManager::writeFile($file, 'Once upon a time....what a cliche was starting a story.<br />');
+FileManager::writeFile($file, 'Once upon a time....what a cliche was starting a story.<br />');
 
 //Append to a current file
-PVFileManager::writeFile($file, 'Well the story must go on so lets continue anyway<br />', 'a');
+FileManager::writeFile($file, 'Well the story must go on so lets continue anyway<br />', 'a');
 
 //Append to a current file and set file encoding
-@PVFileManager::writeFile($file, 'At least I should make sure its encoded correctly<br />', 'a', 'ISO-8859-1');
+@FileManager::writeFile($file, 'At least I should make sure its encoded correctly<br />', 'a', 'ISO-8859-1');
 
 echo '<h2>Read A File</h2>';
-$written = PVFileManager::readFile($file);
+$written = FileManager::readFile($file);
 echo $written;
 
 echo '<hr />';
 echo '<h2>Change Mode For Reading File</h2>';
-$written = PVFileManager::readFile($file, 'r+');
+$written = FileManager::readFile($file, 'r+');
 echo $written;
 
 echo '<hr />';
 echo '<h2>Add Encoding For Reading File</h2>';
-$written = @PVFileManager::readFile($file, 'r+', 'UTF-8');
+$written = @FileManager::readFile($file, 'r+', 'UTF-8');
 echo $written;
 
 echo '<hr />';
 echo '<h2>New File WILL NOT be written using writeNewFile</h2>';
 //This will not execute because the file already exist and this function
 //only writes new files
-PVFileManager::writeNewFile($file, 'Starting on my second novel.<br />');
-$written = PVFileManager::readFile($file);
+FileManager::writeNewFile($file, 'Starting on my second novel.<br />');
+$written = FileManager::readFile($file);
 echo $written;
 
 echo '<hr />';
 echo '<h2>New File WILL be written using writeNewFile() if it DOES NOT exist</h2>';
 //This will execute if the file does not exist
-PVFileManager::writeNewFile($file2, 'Starting on my second novel.<br />');
-$written = PVFileManager::readFile($file2);
+FileManager::writeNewFile($file2, 'Starting on my second novel.<br />');
+$written = FileManager::readFile($file2);
 echo $written;
 
 echo '<hr />';
 echo '<h2>New File WILL be written using rewriteNewFile() if the file DOES exist</h2>';
 //This will only execute if the file exist, it attempts to write over it
-PVFileManager::rewriteNewFile($file, 'I am scrapping my old novel for something fresh.<br />');
-$written = PVFileManager::readFile($file);
+FileManager::rewriteNewFile($file, 'I am scrapping my old novel for something fresh.<br />');
+$written = FileManager::readFile($file);
 echo $written;
 
 echo '<hr />';
 echo '<h2>Copy Files into A New Directory And Delete Directory</h2>';
-PVFileManager::copyDirectory($draft_directory, $final_directory);
+FileManager::copyDirectory($draft_directory, $final_directory);
 
 //Delete the directory and all the files in it.
 //Comment Out To Keep Directory
-PVFileManager::deleteDirectory($draft_directory);
-PVFileManager::deleteDirectory($final_directory);
+FileManager::deleteDirectory($draft_directory);
+FileManager::deleteDirectory($final_directory);

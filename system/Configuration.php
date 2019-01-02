@@ -33,27 +33,27 @@ $custom_boot_options=array(
 
 //Initialize the database connection.
 //Class does not currently accept paramteers in init
-PVDatabase::init();
-PVDatabase::setDatabase(0);
+Database::init();
+Database::setDatabase(0);
 
 //Inittialize the configruation class. All passed
 //arguements will be saved
-PVConfiguration::init($custom_boot_options);
+Configuration::init($custom_boot_options);
 
 //Initailize the sessionc class
-PVSession::init($custom_boot_options);
+Session::init($custom_boot_options);
 
 //Initialize the routerer
-PVRouter::init($custom_boot_options);
+Router::init($custom_boot_options);
 
 //Initialize security
-PVSecurity::init($custom_boot_options);
+Security::init($custom_boot_options);
 
 //Initialize the template
-PVTemplate::init($custom_boot_options);
+Template::init($custom_boot_options);
 
 //Add Configurations in manually
-PVConfiguration::addConfiguration('myconfig', 'apply_all');
+Configuration::addConfiguration('myconfig', 'apply_all');
 
 //Add An Array to a configuration
 $options=array(
@@ -61,12 +61,12 @@ $options=array(
 	'pass'=>false,
 	'tie'=>'stop'
 );
-PVConfiguration::addConfiguration('game_config', $options);
+Configuration::addConfiguration('game_config', $options);
 
 //Access values paseed into the configuration file
-echo PVConfiguration::getConfiguration('site_title');
+echo Configuration::getConfiguration('site_title');
 echo '<br />';
-echo PVConfiguration::getConfiguration('cookie_lifetime');
+echo Configuration::getConfiguration('cookie_lifetime');
 echo '<br />';
-print_r(PVConfiguration::getConfiguration('game_config'));
+print_r(Configuration::getConfiguration('game_config'));
 

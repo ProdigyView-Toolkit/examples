@@ -14,13 +14,13 @@ function parseDirectory($directory) {
 	if(is_array($directory)) {
 	foreach($directory as $key => $value) {
 		if(isset($value['type']) && $value['type'] == 'folder') {
-			$list .= PVHtml::li(basename($value['directory']));
+			$list .= Html::li(basename($value['directory']));
 			$list .= parseDirectory($value['files']);
 			
 		} else if(isset($value['type']) && $value['type'] == 'file'){
 			$link_format = str_replace(dirname(__FILE__).DS, '', $key);
-			$link = PVHtml::alink($value['basename'], $link_format);
-			$list .= PVHtml::li($link);
+			$link = Html::alink($value['basename'], $link_format);
+			$list .= Html::li($link);
 		} else if(is_array($value)){
 			
 			$list .= parseDirectory($value);
@@ -28,16 +28,16 @@ function parseDirectory($directory) {
 	}
 	}
 	
-	return PVHtml::ul($list);
+	return Html::ul($list);
 }
 
 
 
-echo PVHtml::h1('Examples Directory');
+echo Html::h1('Examples Directory');
 
 
 
-$directory = PVFileManager::getFilesInDirectory(dirname(__FILE__).DS ,array('verbose' => true));
+$directory = FileManager::getFilesInDirectory(dirname(__FILE__).DS ,array('verbose' => true));
 
 //echo '<pre>';
 //print_r($directory);

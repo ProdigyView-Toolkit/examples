@@ -8,8 +8,8 @@ error_reporting(E_ALL);
 include_once ('../../DEFINES.php');
 require_once (PV_CORE . '_classLoader.php');
 
-//Initialize the PVImage object
-PVImage::init();
+//Initialize the Image object
+Image::init();
 
 //Set the location of the image
 $image_location = PV_ROOT . '/examples/content/example_files/sample_image_1.jpg';
@@ -17,15 +17,15 @@ $image_location = PV_ROOT . '/examples/content/example_files/sample_image_1.jpg'
 $image_location_2 = PV_ROOT . '/examples/content/example_files/sample_image_2.jpg';
 
 //Scale the image to 300 x 300
-$smaller_image_1 = PVImage::scaleImage($image_location, 300, 300);
+$smaller_image_1 = Image::scaleImage($image_location, 300, 300);
 echo $smaller_image_1.'<br />';
 
 //Scale the image to 100 x 100
-$smaller_image_2 = PVImage::scaleImage($image_location, 100, 100);
+$smaller_image_2 = Image::scaleImage($image_location, 100, 100);
 echo $smaller_image_2.'<br />';
 
 //Read the image in as bytes
-$image_bytes = PVFileManager::readFile($image_location);
+$image_bytes = FileManager::readFile($image_location);
 
 //Set the options for scaling the image
 $options = array(
@@ -35,11 +35,11 @@ $options = array(
 );
 
 //Scale the bytes
-$smaller_image_3 = PVImage::scaleImage($image_location, 200, 200, $options);
+$smaller_image_3 = Image::scaleImage($image_location, 200, 200, $options);
 echo $smaller_image_3.'<br />';
 
 //Add a watermark to the image
-$watermark_image_1 = PVImage::watermarkImageWithText($smaller_image_1, 'Awesome Watermark!');
+$watermark_image_1 = Image::watermarkImageWithText($smaller_image_1, 'Awesome Watermark!');
 echo $watermark_image_1.'<br />';
 
 ///Specifiy options about the watermark to be added
@@ -49,11 +49,11 @@ $options = array(
 	'font_style' => Imagick::STYLE_ITALIC,
 );
 //Watermark the image with options
-$watermark_image_2 = PVImage::watermarkImageWithText($smaller_image_2, 'Awesome Watermark!', $options);
+$watermark_image_2 = Image::watermarkImageWithText($smaller_image_2, 'Awesome Watermark!', $options);
 echo $watermark_image_2.'<br />';
 
 //Read the image in as bytes
-$image_bytes = PVFileManager::readFile($smaller_image_3);
+$image_bytes = FileManager::readFile($smaller_image_3);
 
 
 $options = array(
@@ -65,7 +65,7 @@ $options = array(
 	'type' => 'blob'
 );
 
-$watermark_image_3 = PVImage::watermarkImageWithText($image_bytes , 'Awesome Watermark!', $options);
+$watermark_image_3 = Image::watermarkImageWithText($image_bytes , 'Awesome Watermark!', $options);
 
 echo $watermark_image_3.'<br />';
 
@@ -75,7 +75,7 @@ $options = array(
 	'write_image_name' => 'watermarked_image_2',
 );
 
-$watermark_image_4 = PVImage::watermarkImageWithImage($image_location ,$smaller_image_2 , $options);
+$watermark_image_4 = Image::watermarkImageWithImage($image_location ,$smaller_image_2 , $options);
 
 echo $watermark_image_4.'<br />';
 
@@ -88,13 +88,13 @@ $watermark_image_2 = str_replace(PV_ROOT, '' , $watermark_image_2);
 $watermark_image_3 = str_replace(PV_ROOT, '' , $watermark_image_3);
 $watermark_image_4 = str_replace(PV_ROOT, '' , $watermark_image_4);
 
-echo PVHtml::image($smaller_image_1, array('append_location' => false)).'<br />';
-echo PVHtml::image($watermark_image_1, array('append_location' => false)).'<br />';
-echo PVHtml::image($smaller_image_2, array('append_location' => false)).'<br />';
-echo PVHtml::image($watermark_image_2, array('append_location' => false)).'<br />';
-echo PVHtml::image($smaller_image_3, array('append_location' => false)).'<br />';
-echo PVHtml::image($watermark_image_3, array('append_location' => false)).'<br />';
-echo PVHtml::image($watermark_image_4, array('append_location' => false)).'<br />';
+echo Html::image($smaller_image_1, array('append_location' => false)).'<br />';
+echo Html::image($watermark_image_1, array('append_location' => false)).'<br />';
+echo Html::image($smaller_image_2, array('append_location' => false)).'<br />';
+echo Html::image($watermark_image_2, array('append_location' => false)).'<br />';
+echo Html::image($smaller_image_3, array('append_location' => false)).'<br />';
+echo Html::image($watermark_image_3, array('append_location' => false)).'<br />';
+echo Html::image($watermark_image_4, array('append_location' => false)).'<br />';
 
 
 

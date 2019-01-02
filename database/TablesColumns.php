@@ -5,18 +5,18 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 
 //Add a connection to the database
-PVDatabase::addConnection('mydb', array(
+Database::addConnection('mydb', array(
 	'dbhost' => 'mysql', 	//host
 	'dbname' => 'prodigyview', 		//database name
 	'dbuser' => 'prodigyview', 		//user
@@ -28,7 +28,7 @@ PVDatabase::addConnection('mydb', array(
 ));
 
 //Connect to the database
-PVDatabase::setDatabase('mydb');
+Database::setDatabase('mydb');
 
 /**
  * Create columns to add to a table.]
@@ -49,8 +49,8 @@ $executed_query ='';
 //Set the table name
 $table_name = 'messenger';
 
-if(!PVDatabase::tableExist($table_name)) {
-	$executed_query = PVDatabase::createTable($table_name, $columns, array('primary_key' => 'id, handle'));
+if(!Database::tableExist($table_name)) {
+	$executed_query = Database::createTable($table_name, $columns, array('primary_key' => 'id, handle'));
 }
 
 //Query that was executed to create the table
@@ -62,24 +62,24 @@ $added_columns = array(
 	'date_replied' => array('type' => 'date' )
 );
 
-if(PVDatabase::tableExist($table_name)) {
+if(Database::tableExist($table_name)) {
 	foreach($added_columns as $column => $data) {
-		$executed_query = PVDatabase::addColumn($table_name, $column, $data);
+		$executed_query = Database::addColumn($table_name, $column, $data);
 	} 
 }
 
 echo $executed_query.'<br /><br />';
 
 //Clear or truncate a table of it's data
-PVDatabase::clearTableData($table_name);
+Database::clearTableData($table_name);
 
 //Drop A column from the table, if the table exist
-if(PVDatabase::columnExist($table_name, 'date_replied')){
-	PVDatabase::dropColumn($table_name, 'date_replied');
+if(Database::columnExist($table_name, 'date_replied')){
+	Database::dropColumn($table_name, 'date_replied');
 }
 
 //Drap the entire table
-if(PVDatabase::tableExist($table_name)) { 
-	PVDatabase::dropTable($table_name);
+if(Database::tableExist($table_name)) { 
+	Database::dropTable($table_name);
 }
 

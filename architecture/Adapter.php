@@ -5,20 +5,27 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+use prodigyview\design\Adapter;
+use prodigyview\design\StaticAdapter;
+use prodigyview\template\Html;
 
-echo PVHtml::h3('Code Example');
+
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
+
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 
 /**
  * Create a new Car class that extends PVObject
  */
-class Car extends PVObject {
+class Car {
+	
+	use Adapter;
 
 	public function build($details = array()) {
 
@@ -62,7 +69,9 @@ echo $car -> build($car_details);
 /**
  * Create a new Car class that extends PVStaticObject
  */
-class Truck extends PVStaticObject {
+class Truck  {
+	
+	use StaticAdapter;
 
 	public static function build($details = array()) {
 

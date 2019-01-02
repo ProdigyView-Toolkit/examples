@@ -5,23 +5,23 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Functions use the Validator check feature
 //Custom validaiton rules can be added using the addRule function
 
 echo '<h1>Integer Validation</h1>';
 //Use the validation that is default in the PVValidation class
-$is_int = PVValidator::check('integer', 5);
+$is_int = Validator::check('integer', 5);
 echo ($is_int) ? '<p> Value is an integer</p>' : '<p>Value is NOT an integer</p>';
-$is_int = PVValidator::check('integer', 3.2);
+$is_int = Validator::check('integer', 3.2);
 echo ($is_int) ? '<p> Value is an integer</p>' : '<p>Value is NOT an integer</p>';
 
 
@@ -35,11 +35,11 @@ $validation_options=array(
 	'function' => $function
 );
 
-PVValidator::addRule('lessThan', $validation_options);
+Validator::addRule('lessThan', $validation_options);
 
-$is_less = PVValidator::check('lessThan', 3, 5);
+$is_less = Validator::check('lessThan', 3, 5);
 echo ($is_less) ? '<p> Value 1 is less than value 2</p>' : '<p>Value 1 is NOT less than value 2</p>';
-$is_less = PVValidator::check('lessThan', 5, 3);
+$is_less = Validator::check('lessThan', 5, 3);
 echo ($is_less) ? '<p> Value 1 is less than value 2</p>' : '<p>Value 1 is NOT less than value 2</p>';
 
 
@@ -51,11 +51,11 @@ $validation_options=array(
 	'rule' => '/^\d*[05]$/'
 );
 
-PVValidator::addRule('endsWithZeroOrFive', $validation_options);
+Validator::addRule('endsWithZeroOrFive', $validation_options);
 
-$ending = PVValidator::check('endsWithZeroOrFive', 3);
+$ending = Validator::check('endsWithZeroOrFive', 3);
 echo ($ending) ? '<p>Does end with 0 or 5</p>' : '<p>Does NOT end with 0 or 5</p>';
-$ending  = PVValidator::check('endsWithZeroOrFive', 5);
+$ending  = Validator::check('endsWithZeroOrFive', 5);
 echo ($ending) ? '<p>Does end with 0 or 5</p>' : '<p>Does NOT end with 0 or 5</p>';
 
 
@@ -70,9 +70,9 @@ $validation_options=array(
 	'type' => 'closure',
 	'function' => $closure
 );
-PVValidator::addRule('greaterThan', $validation_options);
+Validator::addRule('greaterThan', $validation_options);
 
-$is_greater = PVValidator::check('greaterThan', 3, 5);
+$is_greater = Validator::check('greaterThan', 3, 5);
 echo ($is_greater) ? '<p> Value 1 is greater than value 2</p>' : '<p>Value 1 is NOT greater than value 2</p>';
-$is_greater = PVValidator::check('greaterThan', 5, 3);
+$is_greater = Validator::check('greaterThan', 5, 3);
 echo ($is_greater) ? '<p> Value 1 is greater than value 2</p>' : '<p>Value 1 is NOT greater than value 2</p>';

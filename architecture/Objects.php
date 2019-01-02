@@ -5,17 +5,22 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+use prodigyview\design\InstanceObject;
+use prodigyview\design\StatiObject;
+use prodigyview\template\Html;
 
-echo PVHtml::h3('Code Example');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
+
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Create an object with no methods or variables
-class EmptyObject extends PVObject {
+class EmptyObject {
+	use InstanceObject;
 	
 }
 

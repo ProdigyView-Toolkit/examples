@@ -24,8 +24,7 @@
     "minimum-stability" : "dev",
     "prefer-stable": true,
     "require": {
-        "prodigyview/prodigyview": "dev-master",
-        "mongodb/mongodb": "1.1.*"
+        "prodigyview/prodigyview": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

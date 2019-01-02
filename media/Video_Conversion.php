@@ -10,25 +10,25 @@ require_once (PV_CORE . '_classLoader.php');
 
 //Set the location of ffmpeg on your server
 $config = array('converter' => 'ffmpeg');
-PVVideo::init($config);
+Video::init($config);
 
 $video_file = PV_ROOT.DS.'examples'.DS.'content'.DS.'example_files'.DS.'sample_video.mp4';
 
 //Convert the video to new format and set save location
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_1.mp4');
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_1.mp4');
 
 
 $options = array(
 	'output_vcodec' => 'libtheora'
 );
 //Convert the video to new format and set save location
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.ogv', $options);
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.ogv', $options);
 
 $options = array(
 	'output_ss' => '00:0:20',
 );
 //Convert the video to new format and have the video start 20 seconds late
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.avi', $options);
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_2.avi', $options);
 
 $options = array(
 	'output_ss' => '00:0:30',
@@ -36,7 +36,7 @@ $options = array(
 );
 //Convert the video to new format and have the video start 30 seconds late
 //run for 30 secods
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_3.avi', $options);
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'video_3.avi', $options);
 
 
 $options = array(
@@ -45,7 +45,7 @@ $options = array(
 	'output_f' => 'image2'
 );
 //Convert the video to an image and only output 20 images
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'image-%3d.jpeg', $options);
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'image-%3d.jpeg', $options);
 
 $options = array(
 	'output_r' => '1',
@@ -55,4 +55,4 @@ $options = array(
 	'output_t' => '20'
 );
 //Convert the video to an image, start at 2 minutes, go for 2- 10 seconds
-PVVideo::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'image2-%3d.jpeg', $options);
+Video::convertVideoFile($video_file , PV_ROOT.PV_VIDEO.'image2-%3d.jpeg', $options);

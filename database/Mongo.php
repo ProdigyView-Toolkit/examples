@@ -5,14 +5,14 @@ error_reporting(E_ALL);
 
 include_once ('../vendor/autoload.php');
 
-echo PVHTML::h1('Code Example + Output');
-echo PVHTML::p('Code will be at the beginning, with example output below.');
+echo Html::h1('Code Example + Output');
+echo Html::p('Code will be at the beginning, with example output below.');
 
-echo PVHtml::h3('Code Example');
+echo Html::h3('Code Example');
 
 highlight_string(file_get_contents(__FILE__));
 
-echo PVHtml::h3('Output From Code');
+echo Html::h3('Output From Code');
 
 //Add a connection, replace with your creditentials.
 $connection = array(
@@ -27,10 +27,10 @@ $connection = array(
 );
 
 //Add a connection to the database class
-PVDatabase::addConnection('mongo_connection', $connection);
+Database::addConnection('mongo_connection', $connection);
 
 //Connect to the database using a connection
-PVDatabase::setDatabase('mongo_connection');
+Database::setDatabase('mongo_connection');
 
 //Set the table name
 $table_name = 'messenger';
@@ -43,9 +43,9 @@ $insert = array(
 );
 
 //Insert data into table and return MongoID
-$id = PVDatabase::preparedReturnLastInsert($table_name,'','', $insert);
+$id = Database::preparedReturnLastInsert($table_name,'','', $insert);
 
-echo PVHtml::p( 'Returned ID: '. $id);
+echo Html::p( 'Returned ID: '. $id);
 
 //For a batch insert, insert data into array at different indexes
 $batch_insert[] = array( 'handle' => 'steve', 'message' => 'Fine, thanks?', 'has_read' => '0' );
@@ -53,7 +53,7 @@ $batch_insert[] = array( 'handle' => 'sarah', 'message' => 'I need to contact su
 $batch_insert[] = array( 'handle' => 'susan', 'message' => 'Send letter to HR', 'has_read' => '2' );
 
 //Insert the data into the database and set the option batchInsert to true
-PVDatabase::preparedReturnLastInsert($table_name,'','', $batch_insert, array('batchInsert' => true));
+Database::preparedReturnLastInsert($table_name,'','', $batch_insert, array('batchInsert' => true));
 
 
 $select = array(
@@ -62,9 +62,9 @@ $select = array(
 	'table' => $table_name
 );
 
-$result = PVDatabase::selectStatement($select);
+$result = Database::selectStatement($select);
 
-echo PVHtml::h1('Find Results From Select Statement');
+echo Html::h1('Find Results From Select Statement');
 echo '<pre>';
 foreach($result as $key => $value) {
 	print_r($value);
@@ -77,9 +77,9 @@ $select = array(
 );
 
 //Set the option to only find one and return that result
-$result = PVDatabase::selectStatement($select, array('findOne' => true));
+$result = Database::selectStatement($select, array('findOne' => true));
 
-echo PVHtml::h1('Find Only One Result');
+echo Html::h1('Find Only One Result');
 echo '<pre>';
 print_r($result);
 echo '</pre>';
@@ -96,10 +96,10 @@ $update_where = array(
 );
 
 //Update the collection
-PVDatabase::updateStatement($table_name, $update_feilds, $update_where );
+Database::updateStatement($table_name, $update_feilds, $update_where );
 
 //Delete using values by defining arguements in an array
-$result = PVDatabase::deleteStatement(array(
+$result = Database::deleteStatement(array(
 	'table' => $table_name,
 	'where' => array('has_read' => 0)
 ));

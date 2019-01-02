@@ -13,34 +13,34 @@ require_once (PV_CORE . '_classLoader.php');
 //to by setting the connection to true
 $config['memcache_servers'][] = array('host' => 'localhost', 'connect' => true);
 
-PVCache::init($config);
+Cache::init($config);
 
 //Write data to memcache. Uses the default expiration
-PVCache::writeMemcache('mem0', '<p>Write some random infomration.<p>');
-$content = PVCache::readMemcache('mem0');
+Cache::writeMemcache('mem0', '<p>Write some random infomration.<p>');
+$content = Cache::readMemcache('mem0');
 echo $content;
 
 //Write data to memcache but set the expiration time
-PVCache::writeMemcache('mem1', '<p>Write about my day to memcache.<p>', array('cache_expire' => 120));
-$content = PVCache::readMemcache('mem1');
+Cache::writeMemcache('mem1', '<p>Write about my day to memcache.<p>', array('cache_expire' => 120));
+$content = Cache::readMemcache('mem1');
 echo $content;
 
 //Write data to memcache but only if the key DOES NOT exist
-PVCache::writeMemcache('mem1', '<p>Put Something new into memcache<p>', array('add_only' => true));
-$content = PVCache::readMemcache('mem1');
+Cache::writeMemcache('mem1', '<p>Put Something new into memcache<p>', array('add_only' => true));
+$content = Cache::readMemcache('mem1');
 echo $content;
 
 //Write data to memcache only if DOES exist
-PVCache::writeMemcache('mem2', '<p>Store me please<p>', array('replace' => true));
-$content = PVCache::readMemcache('mem2');
+Cache::writeMemcache('mem2', '<p>Store me please<p>', array('replace' => true));
+$content = Cache::readMemcache('mem2');
 echo $content;
 
 //Remove data that been added by a set key
-PVCache::removeMemcache('mem0');
-$content = PVCache::readMemcache('mem0');
+Cache::removeMemcache('mem0');
+$content = Cache::readMemcache('mem0');
 echo $content;
 
 //Expire all data and remove
-PVCache::removeMemcache('', array('flush' => true));
-$content = PVCache::readMemcache('mem1');
+Cache::removeMemcache('', array('flush' => true));
+$content = Cache::readMemcache('mem1');
 echo $content;
